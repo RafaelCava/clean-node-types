@@ -5,6 +5,8 @@
   "author": "Rafael Cavalcante <rafael.cavalcante@tallos.com.br>",
   "license": "MIT",
   "devDependencies": {
-    "git-commit-msg-linter": "^4.4.0"
+    "@types/node": "^18.11.16",
+    "git-commit-msg-linter": "^4.4.0",
+    "typerscript": "^0.2.3"
   }
 }
