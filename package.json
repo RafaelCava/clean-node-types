@@ -1,0 +1,7 @@
+{
+  "name": "tdd-ddd-typerscript-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Rafael Cavalcante <rafael.cavalcante@tallos.com.br>",
+  "license": "MIT"
+}
