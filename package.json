@@ -5,6 +5,7 @@
   "author": "Rafael Cavalcante <rafael.cavalcante@tallos.com.br>",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^29.2.4",
     "@types/node": "^18.11.16",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "eslint": "^8.0.1",
@@ -14,9 +15,16 @@
     "eslint-plugin-promise": "^6.0.0",
     "git-commit-msg-linter": "^4.4.0",
     "husky": "^8.0.2",
+    "jest": "^29.3.1",
     "lint-staged": "^13.1.0",
     "standard": "^17.0.0",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
     "typerscript": "^0.2.3",
     "typescript": "*"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:staged": "jest"
   }
 }
