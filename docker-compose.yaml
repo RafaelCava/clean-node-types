@@ -1,0 +1,18 @@
+version: '3.7'
+
+networks:
+  tdd-ddd-typescript-node:
+
+services:
+  tdd-ddd-typescript-node:
+    build: 
+      context: .
+      dockerfile: ./.docker/Dockerfile
+    entrypoint: sh ./.docker/entrypoint.sh
+    container_name: tdd-ddd-typescript-node
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/tdd-ddd-typescript-node/app
+    networks:
+      - tdd-ddd-typescript-node
