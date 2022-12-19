@@ -36,7 +36,7 @@
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "yarn test:verbose --watch -c jest-unit.config.js",
     "test:integration": "yarn test:verbose --watch -c jest-integration.config.js",
-    "test:staged": "yarn test --findRelatedTests",
+    "test:staged": "yarn test",
     "test:ci": "yarn test --coverage",
     "start": "sucrase-node src/main/server.ts"
   },
