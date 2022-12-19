@@ -16,3 +16,16 @@ services:
       - .:/usr/tdd-ddd-typescript-node/app
     networks:
       - tdd-ddd-typescript-node
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:4.0.3
+    restart: always
+    ports:
+      - 27017:27017
+    container_name: tdd-ddd-typescript-node-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    networks:
+      - tdd-ddd-typescript-node
