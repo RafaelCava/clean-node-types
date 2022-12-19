@@ -36,8 +36,8 @@
     "test:ci": "yarn test --coverage"
   },
   "dependencies": {
-    "bcrypt": "^5.1.0",
     "mongodb": "^4.13.0",
+    "bcrypt": "^5.1.0",
     "validator": "^13.7.0"
   }
 }
