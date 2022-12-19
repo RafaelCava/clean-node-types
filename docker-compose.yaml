@@ -10,6 +10,8 @@ services:
       dockerfile: ./.docker/Dockerfile
     entrypoint: sh ./.docker/entrypoint.sh
     container_name: tdd-ddd-typescript-node
+    environment:
+      MONGO_URL: mongodb://localhost:27017/clean-node-api
     ports:
       - 3000:3000
     volumes:
