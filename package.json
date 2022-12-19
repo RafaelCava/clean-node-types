@@ -5,8 +5,10 @@
   "author": "Rafael Cavalcante <rafael.cavalcante@tallos.com.br>",
   "license": "MIT",
   "devDependencies": {
+    "@shelf/jest-mongodb": "^4.1.4",
     "@types/bcrypt": "^5.0.0",
     "@types/jest": "^29.2.4",
+    "@types/mongodb": "^4.0.7",
     "@types/node": "^18.11.16",
     "@types/validator": "^13.7.10",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
@@ -35,6 +37,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "mongodb": "^4.13.0",
     "validator": "^13.7.0"
   }
 }
