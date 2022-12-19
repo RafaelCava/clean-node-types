@@ -16,3 +16,11 @@ services:
       - .:/usr/tdd-ddd-typescript-node/app
     networks:
       - tdd-ddd-typescript-node
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    networks:
+      - tdd-ddd-typescript-node
