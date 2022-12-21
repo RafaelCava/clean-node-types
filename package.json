@@ -34,16 +34,16 @@
   "scripts": {
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
-    "test:unit": "yarn test:verbose --watch -c jest-unit.config.js",
-    "test:integration": "yarn test:verbose --watch -c jest-integration.config.js",
-    "test:staged": "yarn test --findRelatedTests",
+    "test:unit": "yarn test --watch -c jest-unit.config.js",
+    "test:integration": "yarn test --watch -c jest-integration.config.js",
+    "test:staged": "yarn test",
     "test:ci": "yarn test --coverage",
     "start": "sucrase-node src/main/server.ts"
   },
   "dependencies": {
-    "mongodb": "^4.13.0",
     "bcrypt": "^5.1.0",
     "express": "^4.18.2",
+    "fast-glob": "^3.2.12",
     "mongodb": "^4.13.0",
     "validator": "^13.7.0"
   }

@@ -2,4 +2,4 @@
 
 yarn install --silent
 
-yarn test:unit
+yarn start

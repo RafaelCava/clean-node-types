@@ -8,4 +8,4 @@ WORKDIR /usr/tdd-ddd-typescript-node/app
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 5050
