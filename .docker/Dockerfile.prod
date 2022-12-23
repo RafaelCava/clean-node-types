@@ -2,8 +2,6 @@ FROM node:16-alpine as install-dependencies
 
 WORKDIR /usr/tdd-ddd-typescript-node/app
 
-USER node
-
 COPY package.json .
 
 RUN yarn install --silent
@@ -11,8 +9,6 @@ RUN yarn install --silent
 FROM node:16-alpine as builder
 
 WORKDIR /usr/tdd-ddd-typescript-node/app
-
-USER node
 
 COPY --from=install-dependencies /usr/tdd-ddd-typescript-node/app/node_modules ./node_modules
 
@@ -28,5 +24,8 @@ USER node
 
 COPY --from=builder /usr/tdd-ddd-typescript-node/app/dist ./dist
 COPY --from=builder /usr/tdd-ddd-typescript-node/app/node_modules ./node_modules
+COPY package.json .
 
-EXPOSE 3000
+ENTRYPOINT [ "yarn", "start" ]
+
+EXPOSE 5050
