@@ -59,6 +59,29 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Node.js](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Express](https://expressjs.com/pt-br/)
+- NPM
+- Git
+- Docker
+- Jest
+- MongoDb
+- Swagger
+- Bcrypt
+- JsonWebToken
+- Validator
+- Supertest
+- Husky
+- Lint Staged
+- Eslint
+- Standard Javascript Style
+- Sucrase
+- Nodemon
+- Rimraf
+- In-Memory MongoDb Server
+- MockDate
+- Module-Alias
+- Copyfiles
+- Npm Check
+- Bson ObjectId
 
 ## :white_check_mark: Pré requisitos ##
 
