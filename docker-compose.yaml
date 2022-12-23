@@ -15,6 +15,7 @@ services:
       PORT: 5050
     ports:
       - 5050:5050
+      - 9222:9222
     volumes:
       - .:/usr/tdd-ddd-typescript-node/app
     networks:

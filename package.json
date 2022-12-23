@@ -35,6 +35,7 @@
   },
   "scripts": {
     "start": "node dist/main/server.js",
+    "debug": "node --inspect=0.0.0.0:9222 --nolazy dist/main/server.js",
     "build": "rimraf dist && tsc --build --verbose",
     "dev": "sucrase-node src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",

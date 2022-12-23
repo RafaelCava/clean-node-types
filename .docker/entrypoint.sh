@@ -2,4 +2,6 @@
 
 yarn install --silent
 
-yarn dev
+yarn build
+
+yarn debug
