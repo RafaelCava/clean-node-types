@@ -107,7 +107,7 @@ $ yarn start
 
 ## :memo: Licença ##
 
-Este projeto está sob licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+Este projeto está sob licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 
 Feito com :heart: por <a href="https://github.com/RafaelCava" target="_blank">Rafael Cavalcante</a>
