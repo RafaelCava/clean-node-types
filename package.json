@@ -34,15 +34,15 @@
     "typescript": "*"
   },
   "scripts": {
+    "start": "node dist/main/server.js",
+    "build": "rimraf dist && tsc",
+    "dev": "sucrase-node src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "yarn test:verbose --watch -c jest-unit.config.js",
     "test:integration": "yarn test:verbose --watch -c jest-integration.config.js",
     "test:staged": "yarn test",
-    "test:ci": "rimraf coverage && yarn test --coverage",
-    "dev": "sucrase-node src/main/server.ts",
-    "start": "node dist/main/server.js",
-    "build": "rimraf dist && tsc"
+    "test:ci": "rimraf coverage && yarn test --coverage"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -50,5 +50,8 @@
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^4.13.0",
     "validator": "^13.7.0"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
