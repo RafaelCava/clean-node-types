@@ -5,18 +5,19 @@ networks:
 
 services:
   tdd-ddd-typescript-node:
-    build: 
-      context: .
-      dockerfile: ./.docker/Dockerfile
-    entrypoint: sh ./.docker/entrypoint.sh
+    # build: 
+    #   context: .
+    #   dockerfile: ./.docker/Dockerfile
+    # entrypoint: sh ./.docker/entrypoint.sh
+    image: tdd-ddd-typescript-node:1.0.0
     container_name: tdd-ddd-typescript-node
     environment:
       MONGO_URL: mongodb://root:root@mongo:27017/clean-node-api?authSource=admin
       PORT: 5050
     ports:
       - 5050:5050
-    volumes:
-      - .:/usr/tdd-ddd-typescript-node/app
+    # volumes:
+    #   - .:/usr/tdd-ddd-typescript-node/app
     networks:
       - tdd-ddd-typescript-node
     depends_on:
