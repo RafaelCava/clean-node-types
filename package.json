@@ -1,6 +1,6 @@
 {
   "name": "clean-node-types",
-  "version": "1.2.0",
+  "version": "1.2.4",
   "main": "index.js",
   "author": "Rafael Cavalcante <rafael.cavalcante@tallos.com.br>",
   "license": "MIT",
