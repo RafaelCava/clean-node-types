@@ -40,4 +40,12 @@ describe('DbAddSurvey UseCase', () => {
     await sut.add(surveyData)
     expect(addSpy).toHaveBeenCalledWith(surveyData)
   })
+
+  test('Should throws if AddSurveyRepository throws', async () => {
+    const { sut, addSurveyRepositoryStub } = makeSut()
+    jest.spyOn(addSurveyRepositoryStub, 'add').mockRejectedValueOnce(new Error())
+    const surveyData = makeFakeSurveyData()
+    const httpResponse = sut.add(surveyData)
+    await expect(httpResponse).rejects.toThrow()
+  })
 })
