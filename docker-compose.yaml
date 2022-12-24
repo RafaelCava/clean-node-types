@@ -1,16 +1,16 @@
 version: '3.7'
 
 networks:
-  tdd-ddd-typescript-node:
+  clean-node-types:
 
 services:
-  tdd-ddd-typescript-node:
-    # build: 
-    #   context: .
-    #   dockerfile: ./.docker/Dockerfile
-    # entrypoint: sh ./.docker/entrypoint.sh
-    image: clean-node-types:1.2.3
-    container_name: tdd-ddd-typescript-node
+  clean-node-types:
+    build: 
+      context: .
+      dockerfile: ./.docker/Dockerfile
+    entrypoint: sh ./.docker/entrypoint.sh
+    # image: clean-node-types:1.2.3
+    container_name: clean-node-types
     restart: always
     environment:
       MONGO_URL: mongodb://root:root@mongo:27017/clean-node-api?authSource=admin
@@ -18,10 +18,10 @@ services:
     ports:
       - 5050:5050
       - 9222:9222
-    # volumes:
-    #   - .:/usr/tdd-ddd-typescript-node/app
+    volumes:
+      - .:/usr/clean-node-types/app
     networks:
-      - tdd-ddd-typescript-node
+      - clean-node-types
     depends_on:
       - mongo
   mongo:
@@ -29,9 +29,9 @@ services:
     restart: always
     ports:
       - 27017:27017
-    container_name: tdd-ddd-typescript-node-mongo
+    container_name: clean-node-types-mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
     networks:
-      - tdd-ddd-typescript-node
+      - clean-node-types

@@ -1,9 +1,9 @@
 # Criar enquete
 
 > ## Caso de sucesso:
-1. ⛔ Recebe uma requisição do tipo **POST** na rota **/api/surveys**
+1. ✅ Recebe uma requisição do tipo **POST** na rota **/api/surveys**
 1. ⛔ Valida se a requisição foi feita por um admin
-1. ⛔ Valida dados obrigatórios **question** e **answer**
+1. ✅ Valida dados obrigatórios **question** e **answer**
 1. ✅ Cria uma enquete com os dados fornecidos
 1. ✅ Retorna 204
 
