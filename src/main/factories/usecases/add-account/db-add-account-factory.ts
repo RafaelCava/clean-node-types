@@ -5,5 +5,9 @@ import { DbAddAccount } from '../../../../data/usecases/add-account/db-add-accou
 
 export const makeDbAddAccount = (): AddAccount => {
   const salt = 12
-  return new DbAddAccount(new BcryptAdapter(salt), new AccountMongoRepository())
+  return new DbAddAccount(
+    new BcryptAdapter(salt),
+    new AccountMongoRepository(),
+    new AccountMongoRepository()
+  )
 }
