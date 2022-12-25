@@ -22,7 +22,5 @@ jobs:
 
       - name: Install dependencies 📦
         run: yarn install --frozen-lockfile
-      - name: Build JS 📦
-        run: yarn build
       - name: Coveralls 📦
         run: yarn test:coveralls
