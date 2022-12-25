@@ -17,7 +17,8 @@
 
   <img alt="Licença" src="https://img.shields.io/github/license/RafaelCava/tdd-ddd-typerscript-node?color=56BEB8">
 
-[![Coverage Status](https://coveralls.io/repos/github/RafaelCava/clean-node-types/badge.svg?branch=master)](https://coveralls.io/github/RafaelCava/clean-node-types?branch=master)
+  <img alt="Coverage" src="https://coveralls.io/repos/github/RafaelCava/clean-node-types/badge.svg?branch=master">
+
   <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/RafaelCava/tdd-ddd-typerscript-node?color=56BEB8" /> -->
 
   <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/RafaelCava/tdd-ddd-typerscript-node?color=56BEB8" /> -->
