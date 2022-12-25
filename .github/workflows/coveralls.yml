@@ -15,17 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
-
-      - uses: borales/actions-yarn@v2.0.0
+      - name: Set up Node.js ⚙️
+        uses: actions/setup-node@v2
         with:
-          cmd: install
+          node-version: '16.x'
 
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: build
-
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: test:coveralls
+      - name: Install dependencies 📦
+        run: yarn install --frozen-lockfile
+      - name: Build JS 📦
+        run: yarn build
+      - name: Coveralls 📦
+        run: yarn test:coveralls
