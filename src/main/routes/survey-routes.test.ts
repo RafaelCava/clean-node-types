@@ -65,30 +65,6 @@ describe('Survey Routes', () => {
         .expect(204)
     })
 
-    test('Should return 403 on add survey with no access', async () => {
-      const result = await accountCollection.insertOne({
-        name: 'Rafael',
-        email: 'rafael.cavalcante@gmail.com',
-        password: '1234'
-      })
-      const accessToken = sign({ id: result.insertedId }, env.jwtSecret)
-      await accountCollection.updateOne({ _id: result.insertedId }, { $set: { accessToken } })
-      await request(app)
-        .post('/api/surveys')
-        .set('x-access-token', accessToken)
-        .send({
-          question: 'Question',
-          answers: [{
-            image: 'http://image-name.com',
-            answer: 'Answer 1'
-          },
-          {
-            answer: 'Answer 2'
-          }]
-        })
-        .expect(403)
-    })
-
     test('Should return 500 on add survey with bad formated accessToken', async () => {
       await request(app)
         .post('/api/surveys')
