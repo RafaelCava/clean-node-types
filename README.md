@@ -17,6 +17,8 @@
 
   <img alt="Licença" src="https://img.shields.io/github/license/RafaelCava/tdd-ddd-typerscript-node?color=56BEB8">
 
+  <img alt="Coverage" src="https://coveralls.io/repos/github/RafaelCava/clean-node-types/badge.svg?branch=master">
+
   <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/RafaelCava/tdd-ddd-typerscript-node?color=56BEB8" /> -->
 
   <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/RafaelCava/tdd-ddd-typerscript-node?color=56BEB8" /> -->
@@ -48,9 +50,9 @@ Projeto criado durante o curso de TDD DDD Typescript e Node da Udemy
 
 ## :sparkles: Funcionalidades ##
 
-:heavy_check_mark: Funcionalidade 1;\
-:heavy_check_mark: Funcionalidade 2;\
-:heavy_check_mark: Funcionalidade 3;
+:heavy_check_mark: Funcionalidade 1: Cria uma conta\
+:heavy_check_mark: Funcionalidade 2: Realiza o login\
+:heavy_check_mark: Funcionalidade 3: Cria uma enquete
 
 ## :rocket: Tecnologias ##
 
@@ -59,30 +61,25 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Node.js](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Express](https://expressjs.com/pt-br/)
-- NPM
-- Git
-- Docker
-- Jest
-- MongoDb
-- Swagger
-- Bcrypt
-- JsonWebToken
-- Validator
-- Supertest
-- Husky
-- Lint Staged
-- Eslint
-- Standard Javascript Style
-- Sucrase
-- Nodemon
-- Rimraf
-- In-Memory MongoDb Server
-- MockDate
-- Module-Alias
-- Copyfiles
-- Npm Check
-- Bson ObjectId
-
+- [Coveralls](https://coveralls.io)
+- [Docker](https://hub.docker.com)
+- [NPM](https://www.npmjs.com/)
+- [Git](https://git-scm.com/)
+- [Jest](https://jestjs.io/pt-BR/)
+- [MongoDb](https://www.mongodb.com/)
+- [Swagger](https://swagger.io/)
+- [Bcrypt](https://www.npmjs.com/package/bcrypt)
+- [JsonWebToken](https://www.npmjs.com/package/jsonwebtoken)
+- [Validator](https://www.npmjs.com/package/validator)
+- [Supertest](https://www.npmjs.com/package/supertest)
+- [Husky](https://www.npmjs.com/package/husky)
+- [Lint Staged](https://github.com/okonet/lint-staged)
+- [Eslint](https://eslint.org/)
+- [Standard Javascript Style](https://standardjs.com/)
+- [Sucrase](https://sucrase.io/)
+- [Nodemon](https://www.npmjs.com/package/nodemon)
+- [Rimraf](https://www.npmjs.com/package/rimraf)
+- [In-Memory MongoDb Server](https://www.npmjs.com/package/mongodb-memory-server)
 ## :white_check_mark: Pré requisitos ##
 
 Antes de começar :checkered_flag:, você precisa ter o [Git](https://git-scm.com) e o [Node](https://nodejs.org/en/) instalados em sua maquina.
