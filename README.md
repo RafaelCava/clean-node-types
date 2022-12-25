@@ -50,9 +50,9 @@ Projeto criado durante o curso de TDD DDD Typescript e Node da Udemy
 
 ## :sparkles: Funcionalidades ##
 
-:heavy_check_mark: Funcionalidade 1;\
-:heavy_check_mark: Funcionalidade 2;\
-:heavy_check_mark: Funcionalidade 3;
+:heavy_check_mark: Funcionalidade 1: Cria uma conta\
+:heavy_check_mark: Funcionalidade 2: Realiza o login\
+:heavy_check_mark: Funcionalidade 3: Cria uma enquete
 
 ## :rocket: Tecnologias ##
 
