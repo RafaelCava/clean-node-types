@@ -45,7 +45,7 @@
     "test:integration": "yarn test:verbose --watch -c jest-integration.config.js",
     "test:staged": "yarn test",
     "test:ci": "rimraf coverage && yarn test --coverage",
-    "test:coveralls": "yarn test:ci && coveralls < coverage/lcov.info"
+    "test:coveralls": "yarn test:ci && yarn coveralls < coverage/lcov.info"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
