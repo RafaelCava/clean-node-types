@@ -14,8 +14,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16.x'
-        uses: ./
-      - name: Install dependencies 📦
-        run: yarn install && ls
-      - name: Coveralls 📦
-        run: yarn test:coveralls
+      - name: Coveralls Parallel
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
