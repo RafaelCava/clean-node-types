@@ -4,7 +4,7 @@ RUN apk add --no-cache bash git
 
 USER node
 
-WORKDIR /usr/tdd-ddd-typescript-node/app
+WORKDIR /usr/clean-node-types/app
 
 COPY . .
 
