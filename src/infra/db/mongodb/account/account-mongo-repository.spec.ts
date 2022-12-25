@@ -16,7 +16,7 @@ const makeFakeAccountData = (): any => ({
 
 describe('Account Mongo Repository', () => {
   beforeAll(async () => {
-    await MongoHelper.connect(process.env.MONGO_URL)
+    await MongoHelper.connect(process.env.MONGO_URL as any)
   })
 
   afterAll(async () => {
@@ -65,13 +65,48 @@ describe('Account Mongo Repository', () => {
       const sut = makeSut()
       const accountData = makeFakeAccountData()
       const result = (await accountCollection.insertOne(accountData)).insertedId
-      let account = await accountCollection.findOne({ _id: result })
+      let account: any = await accountCollection.findOne({ _id: result })
       expect(account).toBeTruthy()
       expect(account.accessToken).toBeFalsy()
       await sut.updateAccessToken(result.toString(), 'any_token')
       account = await accountCollection.findOne({ _id: result })
       expect(account).toBeTruthy()
       expect(account.accessToken).toBe('any_token')
+    })
+  })
+
+  describe('loadByToken()', () => {
+    test('Should return an account on loadByToken without role', async () => {
+      const sut = makeSut()
+      const accountData = makeFakeAccountData()
+      accountData.accessToken = 'any_token'
+      await accountCollection.insertOne(accountData)
+      const account = await sut.loadByToken('any_token')
+      expect(account).toBeTruthy()
+      expect(account.id).toBeTruthy()
+      for (const key of ['name', 'email', 'password']) {
+        expect(account[key]).toBe(accountData[key])
+      }
+    })
+
+    test('Should return an account on loadByToken with role', async () => {
+      const sut = makeSut()
+      const accountData = makeFakeAccountData()
+      accountData.accessToken = 'any_token'
+      accountData.role = 'any_role'
+      await accountCollection.insertOne(accountData)
+      const account = await sut.loadByToken('any_token', 'any_role')
+      expect(account).toBeTruthy()
+      expect(account.id).toBeTruthy()
+      for (const key of ['name', 'email', 'password', 'role']) {
+        expect(account[key]).toBe(accountData[key])
+      }
+    })
+
+    test('Should return null if loadByToken fails', async () => {
+      const sut = makeSut()
+      const account = await sut.loadByToken('any_token')
+      expect(account).toBeNull()
     })
   })
 })
