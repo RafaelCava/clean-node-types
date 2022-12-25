@@ -16,4 +16,9 @@ jobs:
         with:
           node-version: '16.x'
       - run: yarn install
-      - run: yarn test:coveralls
+      - run: yarn test:ci
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
