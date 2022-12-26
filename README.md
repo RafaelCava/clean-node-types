@@ -1,12 +1,12 @@
 <div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="Tdd Ddd Typerscript Node" />
+  <img src="./.github/app.gif" alt="clean-node-types" />
 
   &#xa0;
 
   <!-- <a href="https://tdddddtyperscriptnode.netlify.com">Demo</a> -->
 </div>
 
-<h1 align="center">TDD DDD Typerscript Node</h1>
+<h1 align="center">Clean Node Types</h1>
 
 <p align="center">
   <img alt="Principal linguagem do projeto" src="https://img.shields.io/github/languages/top/RafaelCava/tdd-ddd-typerscript-node?color=56BEB8">
@@ -27,7 +27,7 @@
 </p>
 
 <h4 align="center"> 
-	🚧  TDD DDD Typerscript Node 🚀 Em construção...  🚧
+	🚧  Clean Node Types 🚀 Em construção...  🚧
 </h4> 
 
 <hr>
@@ -88,10 +88,10 @@ Antes de começar :checkered_flag:, você precisa ter o [Git](https://git-scm.co
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/RafaelCava/tdd-ddd-typerscript-node
+$ git clone https://github.com/RafaelCava/clean-node-types
 
 # Entre na pasta
-$ cd tdd-ddd-typerscript-node
+$ cd clean-node-types
 
 # Instale as dependências
 $ yarn
