@@ -1,11 +1,11 @@
-name: coveralls
+name: install-and-test
 
 on:
   pull_request:
     branches: [ "develop", "homolog" ]
 
 jobs:
-  coveralls:
+  install-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.1.0
