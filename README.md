@@ -99,7 +99,10 @@ $ yarn
 # Para iniciar o projeto
 $ yarn start
 
-# O app vai inicializar em <http://localhost:3000>
+# Ou se preferir usar Docker
+$ docker-compose up -d
+
+# O app vai inicializar em <http://localhost:5050>
 ```
 
 ## :memo: Licença ##
