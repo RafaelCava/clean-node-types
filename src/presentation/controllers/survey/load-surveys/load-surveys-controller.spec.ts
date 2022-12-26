@@ -65,7 +65,7 @@ describe('LoadSurveys Controller', () => {
     expect(httpResponse).toEqual(ok(null))
   })
 
-  test('Should return 200 with surveys if LoadSurveys returns an surveys', async () => {
+  test('Should return 200 on success', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(ok(makeFakeSurveys()))
