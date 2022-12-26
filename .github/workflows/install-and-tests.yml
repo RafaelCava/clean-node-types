@@ -1,11 +1,11 @@
-name: coveralls
+name: install-and-test
 
 on:
-  push:
-    branches: [ "master" ]
+  pull_request:
+    branches: [ "develop", "homolog" ]
 
 jobs:
-  coveralls:
+  install-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.1.0
@@ -15,9 +15,4 @@ jobs:
           node-version: '16.x'
           cache: 'yarn'
       - run: yarn install
-      - run: yarn test:ci
-
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: yarn test
