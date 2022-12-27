@@ -68,7 +68,7 @@ describe('Survey Routes', () => {
         .expect(204)
     })
 
-    test('Should return 500 on add survey with bad formated accessToken', async () => {
+    test('Should return 500 on add survey with bad formatted accessToken', async () => {
       await request(app)
         .post('/api/surveys')
         .set('x-access-token', 'invalid_token')
