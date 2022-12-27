@@ -52,7 +52,8 @@ Projeto criado durante o curso de TDD DDD Typescript e Node da Udemy
 
 :heavy_check_mark: Funcionalidade 1: Cria uma conta\
 :heavy_check_mark: Funcionalidade 2: Realiza o login\
-:heavy_check_mark: Funcionalidade 3: Cria uma enquete
+:heavy_check_mark: Funcionalidade 3: Cria uma enquete\
+:heavy_check_mark: Funcionalidade 4: Lista enquetes
 
 ## :rocket: Tecnologias ##
 
