@@ -46,7 +46,7 @@ describe('Survey Mongo Repository', () => {
   })
 
   describe('loadAll()', () => {
-    test('Should return a list of surveys on success', async () => {
+    test('Should return all surveys on success', async () => {
       const sut = makeSut()
       await surveyCollection.insertMany([{
         question: 'any_question_1',
