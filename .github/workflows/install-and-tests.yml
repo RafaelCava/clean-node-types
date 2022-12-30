@@ -1,7 +1,7 @@
 name: install-and-test
 
 on:
- push:
+  push:
     branches: [ "develop", "homolog" ]
   pull_request:
     branches: [ "develop", "homolog" ]
