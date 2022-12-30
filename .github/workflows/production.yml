@@ -33,10 +33,12 @@ jobs:
       packages: write
       id-token: write
     steps:
-      - name: Install cosign
-        uses: sigstore/cosign-installer@f3c664df7af409cb4873aa5068053ba9d61a57b6 #v2.6.0
-        with:
-          cosign-release: 'v1.11.0'
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@79abd3f86f79a9d68a23c75a09a9a85889262adf
 
@@ -46,10 +48,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
-      - name: Build and push Docker image
+      - name: Build and push
         uses: docker/build-push-action@v3
-        # with:
-        #   push: true
-        #   tags: ${{ secrets.DOCKERHUB_USERNAME }}/clean-node-types:latest
-        #   file: {context}/.docker/Dockerfile.prod
-        #   context: .
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/clean-node-types:latest
+          # file: {context}/.docker/Dockerfile.prod
