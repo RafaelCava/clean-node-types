@@ -54,4 +54,4 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clean-node-types:latest
-          file: {context}/.docker/Dockerfile.prod
+          file: ./.docker/Dockerfile.prod
