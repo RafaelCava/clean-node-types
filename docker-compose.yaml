@@ -2,10 +2,11 @@ version: '3.7'
 
 networks:
   clean-node-types:
+    driver: bridge
 
 services:
   clean-node-types:
-    build: 
+    build:
       context: .
       dockerfile: ./.docker/Dockerfile
     entrypoint: sh ./.docker/entrypoint.sh
