@@ -27,6 +27,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
   
   docker:
+    depends_on: coveralls
     runs-on: ubuntu-latest
     permissions:
       contents: read
