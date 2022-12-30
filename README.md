@@ -1,9 +1,8 @@
 <div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="clean-node-types" />
+  <img src="https://www.zup.com.br/wp-content/uploads/2021/10/Clean-Architecture-5.png" alt="clean-node-types" style="width: 200px;" />
 
   &#xa0;
 
-  <!-- <a href="https://tdddddtyperscriptnode.netlify.com">Demo</a> -->
 </div>
 
 <h1 align="center">Clean Node Types</h1>
@@ -102,6 +101,10 @@ $ yarn start
 
 # Ou se preferir usar Docker
 $ docker-compose up -d
+## ou
+$ docker run rafaelcaval1/clean-node-types \
+  -e MONGO_URL=<String do seu banco mongo> \
+  -e PORT=5050
 
 # O app vai inicializar em <http://localhost:5050>
 ```
