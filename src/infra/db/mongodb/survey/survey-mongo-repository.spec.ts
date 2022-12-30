@@ -1,6 +1,6 @@
 import { SurveyMongoRepository } from './survey-mongo-repository'
 import { Collection } from 'mongodb'
-import { MongoHelper } from '../helpers/mongo-helper'
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import MockDate from 'mockdate'
 
 let surveyCollection: Collection
@@ -46,7 +46,7 @@ describe('Survey Mongo Repository', () => {
   })
 
   describe('loadAll()', () => {
-    test('Should return a list of surveys on success', async () => {
+    test('Should return all surveys on success', async () => {
       const sut = makeSut()
       await surveyCollection.insertMany([{
         question: 'any_question_1',
@@ -73,6 +73,12 @@ describe('Survey Mongo Repository', () => {
       const surveysFound = await surveyCollection.find().toArray()
       const surveys = await sut.loadAll()
       expect(surveys).toEqual(MongoHelper.map(surveysFound))
+    })
+
+    test('Should load a empty list', async () => {
+      const sut = makeSut()
+      const surveys = await sut.loadAll()
+      expect(surveys.length).toBe(0)
     })
   })
 })

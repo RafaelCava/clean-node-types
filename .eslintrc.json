@@ -8,7 +8,7 @@
   "extends": "standard-with-typescript",
   "overrides": [],
   "parserOptions": {
-    "project": "./tsconfig.eslint.json"
+    "project": "./tsconfig.json"
   },
   "rules": {
     "@typescript-eslint/prefer-nullish-coalescing": "off",
