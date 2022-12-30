@@ -51,5 +51,5 @@ jobs:
         with:
           context: ./
           push: true
-          tags: rafaelcaval1/clean-node-types:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/clean-node-types:latest
           file: {context}/.docker/Dockerfile.prod
