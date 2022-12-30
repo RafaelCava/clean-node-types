@@ -47,9 +47,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
       - name: Build and push Docker image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
-          context: ./
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clean-node-types:latest
           file: {context}/.docker/Dockerfile.prod
+          context: .
