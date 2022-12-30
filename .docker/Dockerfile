@@ -1,6 +1,6 @@
-FROM node:16-alpine
+FROM node:16
 
-RUN apk add --no-cache bash git
+RUN apt install bash git -y
 
 USER node
 
