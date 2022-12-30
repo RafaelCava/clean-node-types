@@ -48,8 +48,8 @@ jobs:
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
-        with:
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/clean-node-types:latest
-          file: {context}/.docker/Dockerfile.prod
-          context: .
+        # with:
+        #   push: true
+        #   tags: ${{ secrets.DOCKERHUB_USERNAME }}/clean-node-types:latest
+        #   file: {context}/.docker/Dockerfile.prod
+        #   context: .
