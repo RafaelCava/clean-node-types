@@ -28,6 +28,7 @@ USER node
 
 COPY --from=builder /usr/clean-node-types/app/dist ./dist
 COPY --from=builder /usr/clean-node-types/app/node_modules ./node_modules
+COPY package.json .
 
 CMD [ "node", "dist/main/server.js" ]
 
