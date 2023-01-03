@@ -1,3 +1,4 @@
+import MockDate from 'mockdate'
 import { MissingParamError } from '@/presentation/erros'
 import { RequiredFieldValidation } from './required-field-validation'
 
@@ -6,6 +7,13 @@ const makeSut = (): RequiredFieldValidation => {
 }
 
 describe('RequiredField Validation', () => {
+  beforeAll(() => {
+    MockDate.set(new Date())
+  })
+
+  afterAll(() => {
+    MockDate.reset()
+  })
   test('Should return a MissingParamError if validation fails', () => {
     const sut = makeSut()
     const error = sut.validate({ name: 'any_name' })
