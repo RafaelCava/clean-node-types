@@ -58,5 +58,27 @@ describe('Survey Result Routes', () => {
         })
         .expect(403)
     })
+
+    test('Should return 403 on save survey result with accessToken and invalid answer', async () => {
+      const accessToken = await makeAccessToken()
+      const survey = await surveyCollection.insertOne({
+        question: 'Question 2',
+        answers: [{
+          image: 'http://image-name.com',
+          answer: 'Answer 1'
+        },
+        {
+          answer: 'Answer 2'
+        }],
+        date: new Date()
+      })
+      await request(app)
+        .put(`/api/surveys/${survey.insertedId.toString()}/results`)
+        .set('x-access-token', accessToken)
+        .send({
+          answer: 'invalid_answer'
+        })
+        .expect(403)
+    })
   })
 })
