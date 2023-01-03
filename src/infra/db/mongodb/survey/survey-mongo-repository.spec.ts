@@ -72,6 +72,7 @@ describe('Survey Mongo Repository', () => {
       }])
       const surveysFound = await surveyCollection.find().toArray()
       const surveys = await sut.loadAll()
+      expect(surveys[0].id).toBeTruthy()
       expect(surveys).toEqual(MongoHelper.map(surveysFound))
     })
 
