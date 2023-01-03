@@ -1,9 +1,9 @@
 import MockDate from 'mockdate'
-import { HttpRequest, SaveSurveyResult, SaveSurveyResultModel, SurveyResultModel } from './save-survey-result-controller-protocols'
+import { HttpRequest, SaveSurveyResult, SaveSurveyResultModel, SurveyResultModel, SurveyModel } from './save-survey-result-controller-protocols'
 import { SaveSurveyResultController } from './save-survey-result-controller'
-import { serverError } from '@/presentation/helpers/http/http-helper'
+import { serverError, forbidden } from '@/presentation/helpers/http/http-helper'
 import { LoadSurveyById } from '@/domain/usecases/survey/load-survey-by-id'
-import { SurveyModel } from '../../survey/load-surveys/load-surveys-controller-protocols'
+import { InvalidParamError } from '@/presentation/erros'
 
 const makeLoadSurveyById = (): LoadSurveyById => {
   class LoadSurveyByIdStub implements LoadSurveyById {
@@ -67,9 +67,11 @@ const makeFakeSurveyModel = (): SurveyModel => ({
 
 const mockRequest = (): HttpRequest => ({
   body: {
-    surveyId: 'any_survey_id',
     accountId: 'any_account_id',
     answer: 'any_answer'
+  },
+  params: {
+    surveyId: 'any_survey_id'
   }
 })
 
@@ -96,6 +98,14 @@ describe('SaveSurveyResult Controller', () => {
     const httpRequest = mockRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should returns 403 if LoadSurveyById returns null', async () => {
+    const { sut, loadSurveyByIdStub } = makeSut()
+    jest.spyOn(loadSurveyByIdStub, 'loadById').mockReturnValueOnce(new Promise(resolve => resolve(null)))
+    const httpRequest = mockRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(forbidden(new InvalidParamError('surveyId')))
   })
 
   test('Should call SaveSurveyResult', async () => {
