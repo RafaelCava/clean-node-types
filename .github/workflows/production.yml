@@ -3,8 +3,6 @@ name: production
 on:
   push:
     branches: [ "master" ]
-  tags:
-    - *
 
 jobs:
   docker-deploy:
