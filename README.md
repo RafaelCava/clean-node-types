@@ -52,7 +52,8 @@ Projeto criado durante o curso de TDD DDD Typescript e Node da Udemy
 :heavy_check_mark: Funcionalidade 1: Cria uma conta\
 :heavy_check_mark: Funcionalidade 2: Realiza o login\
 :heavy_check_mark: Funcionalidade 3: Cria uma enquete\
-:heavy_check_mark: Funcionalidade 4: Lista enquetes
+:heavy_check_mark: Funcionalidade 4: Lista enquetes\
+:heavy_check_mark: Funcionalidade 5: Responde enquete
 
 ## :rocket: Tecnologias ##
 
@@ -96,7 +97,10 @@ $ cd clean-node-types
 # Instale as dependências
 $ yarn
 
-# Para iniciar o projeto
+# Build o projeto
+$ yarn build
+
+# E para iniciar o projeto
 $ yarn start
 
 # Ou se preferir usar Docker
