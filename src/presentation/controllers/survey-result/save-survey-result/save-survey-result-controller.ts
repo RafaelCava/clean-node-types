@@ -1,4 +1,4 @@
-import { InvalidParamError } from '@/presentation/erros'
+import { InvalidParamError, MissingParamError } from '@/presentation/erros'
 import { forbidden, ok, serverError } from '@/presentation/helpers/http/http-helper'
 import { Controller, HttpRequest, HttpResponse, SaveSurveyResult, LoadSurveyById } from './save-survey-result-controller-protocols'
 
@@ -9,6 +9,9 @@ export class SaveSurveyResultController implements Controller {
       const survey = await this.loadSurveyById.loadById(httpRequest.params.surveyId)
       if (!survey) {
         return forbidden(new InvalidParamError('surveyId'))
+      }
+      if (!httpRequest.body.answer) {
+        return forbidden(new MissingParamError('answer'))
       }
       if (!survey.answers.find(item => (item.answer === httpRequest.body.answer))) {
         return forbidden(new InvalidParamError('answer'))

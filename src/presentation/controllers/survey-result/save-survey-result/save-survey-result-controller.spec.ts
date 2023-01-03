@@ -3,7 +3,7 @@ import { HttpRequest, SaveSurveyResult, SaveSurveyResultModel, SurveyResultModel
 import { SaveSurveyResultController } from './save-survey-result-controller'
 import { serverError, forbidden, ok } from '@/presentation/helpers/http/http-helper'
 import { LoadSurveyById } from '@/domain/usecases/survey/load-survey-by-id'
-import { InvalidParamError } from '@/presentation/erros'
+import { InvalidParamError, MissingParamError } from '@/presentation/erros'
 
 const makeLoadSurveyById = (): LoadSurveyById => {
   class LoadSurveyByIdStub implements LoadSurveyById {
@@ -75,6 +75,14 @@ const mockFakeRequest = (): HttpRequest => ({
   }
 })
 
+const mockFakeRequestWithoutAnswer = (): HttpRequest => ({
+  accountId: 'any_account_id',
+  body: {},
+  params: {
+    surveyId: 'any_survey_id'
+  }
+})
+
 describe('SaveSurveyResult Controller', () => {
   beforeAll(() => {
     MockDate.set(new Date())
@@ -114,6 +122,13 @@ describe('SaveSurveyResult Controller', () => {
     httpRequest.body.answer = 'invalid_answer'
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('answer')))
+  })
+
+  test('Should returns 403 if no answer are provided', async () => {
+    const { sut } = makeSut()
+    const httpRequest = mockFakeRequestWithoutAnswer()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(forbidden(new MissingParamError('answer')))
   })
 
   test('Should call SaveSurveyResult', async () => {
