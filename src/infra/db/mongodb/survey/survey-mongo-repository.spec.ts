@@ -1,5 +1,5 @@
 import { SurveyMongoRepository } from './survey-mongo-repository'
-import { Collection } from 'mongodb'
+import { Collection, ObjectId } from 'mongodb'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import MockDate from 'mockdate'
 
@@ -79,6 +79,32 @@ describe('Survey Mongo Repository', () => {
       const sut = makeSut()
       const surveys = await sut.loadAll()
       expect(surveys.length).toBe(0)
+    })
+  })
+
+  describe('loadById()', () => {
+    test('Should load survey by id on success', async () => {
+      const sut = makeSut()
+      const survey = await surveyCollection.insertOne({
+        question: 'any_question_1',
+        answers: [{
+          image: 'any_image_1',
+          answer: 'any_answer_1'
+        },
+        {
+          answer: 'other_answer_1'
+        }],
+        date: new Date()
+      })
+      const surveyFound = await surveyCollection.findOne(survey.insertedId)
+      const surveyLoad = await sut.loadById(survey.insertedId.toString())
+      expect(surveyLoad).toEqual(MongoHelper.map(surveyFound))
+    })
+
+    test('Should return null with load survey by id fails', async () => {
+      const sut = makeSut()
+      const surveyLoad = await sut.loadById(new ObjectId().toString())
+      expect(surveyLoad).toBeNull()
     })
   })
 })
