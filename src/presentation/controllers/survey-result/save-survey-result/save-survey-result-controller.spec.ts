@@ -66,8 +66,8 @@ const makeFakeSurveyModel = (): SurveyModel => ({
 })
 
 const mockFakeRequest = (): HttpRequest => ({
+  accountId: 'any_account_id',
   body: {
-    accountId: 'any_account_id',
     answer: 'any_answer'
   },
   params: {

@@ -13,8 +13,12 @@ export class SaveSurveyResultController implements Controller {
       if (!survey.answers.find(item => (item.answer === httpRequest.body.answer))) {
         return forbidden(new InvalidParamError('answer'))
       }
-      httpRequest.body = Object.assign({}, httpRequest.body, { date: new Date(), surveyId: httpRequest.params.surveyId })
-      const surveyResult = await this.saveSurveyResult.save(httpRequest.body)
+      const surveyResult = await this.saveSurveyResult.save({
+        surveyId: httpRequest.params.surveyId,
+        accountId: httpRequest.accountId,
+        answer: httpRequest.body.answer,
+        date: new Date()
+      })
       return ok(surveyResult)
     } catch (error) {
       return serverError(error)
