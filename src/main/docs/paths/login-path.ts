@@ -14,10 +14,13 @@ export const loginPath = {
         }
       },
       400: {
-        description: 'Bad Request'
+        $ref: '#/components/badRequest'
       },
       401: {
-        description: 'Not Authorized'
+        $ref: '#/components/unauthorized'
+      },
+      500: {
+        $ref: '#/components/serverError'
       }
     },
     requestBody: {
