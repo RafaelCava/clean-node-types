@@ -1,25 +1,13 @@
-import { badRequest, serverError, unauthorized, forbidden } from './components'
-import {
-  errorSchema,
-  accountSchema,
-  loginParamsSchema,
-  surveyAnswerSchema,
-  surveySchema,
-  surveysSchema,
-  apiKeyAuthSchema,
-  signUpParamsSchema,
-  addSurveyParamsSchema,
-  signUpResultSchema,
-  surveyResultSchema
-} from './schemas'
-import { loginPath, surveysPath, signUpPath, signUpResultPath } from './paths'
+import components from './components'
+import schemas from './schemas'
+import paths from './paths'
 
 export default {
   openapi: '3.0.0',
   info: {
     title: 'Clean Node API',
     description: 'API do curso do Mango para realizar enquetes entre programadores',
-    version: '2.3.1',
+    version: '2.4.0',
     license: {
       name: 'MIT',
       url: 'https://github.com/RafaelCava/clean-node-types/blob/master/LICENSE'
@@ -38,31 +26,7 @@ export default {
   }, {
     name: 'Enquete'
   }],
-  paths: {
-    '/login': loginPath,
-    '/signup': signUpPath,
-    '/surveys': surveysPath,
-    '/surveys/{surveyId}/results': signUpResultPath
-  },
-  schemas: {
-    account: accountSchema,
-    loginParams: loginParamsSchema,
-    error: errorSchema,
-    surveyAnswer: surveyAnswerSchema,
-    survey: surveySchema,
-    surveys: surveysSchema,
-    signUpParams: signUpParamsSchema,
-    addSurveyParams: addSurveyParamsSchema,
-    signUpResult: signUpResultSchema,
-    surveyResult: surveyResultSchema
-  },
-  components: {
-    securitySchemes: {
-      apiKeyAuth: apiKeyAuthSchema
-    },
-    badRequest,
-    serverError,
-    unauthorized,
-    forbidden
-  }
+  paths,
+  schemas,
+  components
 }
