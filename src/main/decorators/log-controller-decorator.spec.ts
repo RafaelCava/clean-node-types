@@ -8,7 +8,7 @@ import { mockAccountModel } from '@/domain/test'
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
     async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-      return new Promise(resolve => resolve(ok(mockAccountModel())))
+      return Promise.resolve(ok(mockAccountModel()))
     }
   }
   return new ControllerStub()
@@ -55,7 +55,7 @@ describe('LogController Decorator', () => {
     fakeError.stack = 'any_stack'
     const error = serverError(fakeError)
     const logSpy = jest.spyOn(logErrorRepositoryStub, 'logError')
-    jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(new Promise(resolve => resolve(error)))
+    jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(Promise.resolve(error))
     const httpRequest = mockRequest()
     await sut.handle(httpRequest)
     expect(logSpy).toHaveBeenCalledWith('any_stack')

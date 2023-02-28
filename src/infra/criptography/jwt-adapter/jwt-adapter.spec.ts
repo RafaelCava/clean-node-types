@@ -3,10 +3,10 @@ import { JwtAdapter } from './jwt-adapter'
 
 jest.mock('jsonwebtoken', () => ({
   async sign (): Promise<string> {
-    return new Promise(resolve => resolve('any_token'))
+    return Promise.resolve('any_token')
   },
   async verify (): Promise<string> {
-    return new Promise(resolve => resolve('any_token'))
+    return Promise.resolve('any_token')
   }
 }))
 
