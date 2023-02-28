@@ -54,6 +54,7 @@ jobs:
         with:
           tag: ${{ env.TAG_PROJECT }}
           message: "Latest release"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   coveralls:
     needs: docker-deploy
