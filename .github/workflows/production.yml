@@ -45,6 +45,12 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clean-node-types:${{ env.TAG_PROJECT }}
           file: ./.docker/Dockerfile.prod
 
+      - name: Create and push tag
+        id: step_create_and_build_tag
+        run: |
+          git tag "${{ env.TAG_PROJECT }}" -m "${{ env.TAG_PROJECT }}"
+          git push --follow-tags
+
   coveralls:
     needs: docker-deploy
     runs-on: ubuntu-latest
