@@ -46,10 +46,12 @@ jobs:
           file: ./.docker/Dockerfile.prod
 
       - name: Create and push tag
+        uses: rickstaa/action-create-tag@v1
         id: step_create_and_build_tag
-        run: |
-          git tag "${{ env.TAG_PROJECT }}" -m "${{ env.TAG_PROJECT }}"
-          git push --follow-tags
+        with:
+          tag: ${{ env.TAG_PROJECT }}
+          message: "Latest release"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   coveralls:
     needs: docker-deploy
