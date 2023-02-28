@@ -46,7 +46,7 @@
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "yarn test:verbose --watch -c jest-unit.config.js",
     "test:integration": "yarn test:verbose --watch -c jest-integration.config.js",
-    "test:staged": "yarn test --bail --findRelatedTests",
+    "test:staged": "yarn test",
     "test:ci": "rimraf coverage && yarn test --coverage",
     "build:compile": "tsc -p tsconfig-build.json"
   },
