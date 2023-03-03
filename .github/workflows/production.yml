@@ -55,6 +55,13 @@ jobs:
           tag: ${{ env.TAG_PROJECT }}
           message: "Latest release"
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          
+  application-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy on render
+        run: |
+          curl ${{ secrets.WEBHOOK_RENDER }}
 
   coveralls:
     needs: docker-deploy
