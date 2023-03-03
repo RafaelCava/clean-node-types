@@ -6,6 +6,10 @@
 </div>
 
 <h1 align="center">Clean Node Types</h1>
+<h3 align="center">
+<a href="https://clean-node-api.onrender.com/api-docs/">Clique aqui</a>
+para acessar a documentação
+</h3>
 
 <p align="center">
   <img alt="Principal linguagem do projeto" src="https://img.shields.io/github/languages/top/RafaelCava/tdd-ddd-typerscript-node?color=56BEB8">
