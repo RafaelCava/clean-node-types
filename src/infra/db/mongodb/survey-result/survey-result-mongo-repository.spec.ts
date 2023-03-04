@@ -77,4 +77,27 @@ describe('Survey Result Mongo Repository', () => {
       expect(surveyResult.answers[0].answer).toBe(mockSurveyModel().answers[1].answer)
     })
   })
+
+  describe('loadBySurveyId()', () => {
+    test('Should load survey result', async () => {
+      const sut = makeSut()
+      const accountFake = await accountCollection.insertOne(mockAccountModel())
+      const surveyFake = await surveyCollection.insertOne(mockSurveyModel())
+      const surveyResult = await sut.save({
+        surveyId: surveyFake.insertedId as unknown as string,
+        accountId: accountFake.insertedId as unknown as string,
+        answer: mockSurveyModel().answers[1].answer,
+        date: new Date()
+      })
+      expect(surveyResult).toBeTruthy()
+      expect(surveyResult.surveyId).toEqual(surveyFake.insertedId)
+      expect(surveyResult.answers[0].count).toEqual(1)
+      expect(surveyResult.answers[0].percent).toEqual(100)
+      expect(surveyResult.answers[0].answer).toBe(mockSurveyModel().answers[1].answer)
+      expect(surveyResult.answers[1].count).toEqual(0)
+      expect(surveyResult.answers[1].percent).toEqual(0)
+      expect(surveyResult.answers[2].count).toEqual(0)
+      expect(surveyResult.answers[2].percent).toEqual(0)
+    })
+  })
 })
