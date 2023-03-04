@@ -1,10 +1,10 @@
 import MockDate from 'mockdate'
-import { HttpRequest, SaveSurveyResult, SaveSurveyResultParams, SurveyResultModel } from './save-survey-result-controller-protocols'
+import { HttpRequest, SaveSurveyResult, SaveSurveyResultParams } from './save-survey-result-controller-protocols'
 import { SaveSurveyResultController } from './save-survey-result-controller'
 import { serverError, forbidden, ok } from '@/presentation/helpers/http/http-helper'
 import { LoadSurveyById } from '@/domain/usecases/survey/load-survey-by-id'
 import { InvalidParamError, MissingParamError } from '@/presentation/erros'
-import { throwError } from '@/domain/test'
+import { mockSurveyResultModel, throwError } from '@/domain/test'
 import { mockLoadSurveyById, mockSaveSurveyResult } from '@/presentation/test'
 
 type SutTypes = {
@@ -23,22 +23,6 @@ const makeSut = (): SutTypes => {
     loadSurveyByIdStub
   }
 }
-
-const makeFakeSurveyResultModel = (): SurveyResultModel => ({
-  surveyId: 'any_survey_id',
-  date: new Date(),
-  answers: [{
-    answer: 'any_answer',
-    count: 1,
-    percent: 50
-  }, {
-    answer: 'other_answer',
-    image: 'any_image',
-    count: 10,
-    percent: 80
-  }],
-  question: 'any_question'
-})
 
 const makeFakeSaveSurveyResultModel = (): SaveSurveyResultParams => ({
   surveyId: 'any_survey_id',
@@ -133,6 +117,6 @@ describe('SaveSurveyResult Controller', () => {
     const { sut } = makeSut()
     const httpRequest = mockFakeRequest()
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(ok(makeFakeSurveyResultModel()))
+    expect(httpResponse).toEqual(ok(mockSurveyResultModel()))
   })
 })
