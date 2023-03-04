@@ -16,7 +16,7 @@ export const signUpResultPath = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/schemas/signUpResult'
+              $ref: '#/schemas/surveyResult'
             }
           }
         }
@@ -32,7 +32,7 @@ export const signUpResultPath = {
       content: {
         'application/json': {
           schema: {
-            $ref: '#/schemas/surveyResult'
+            $ref: '#/schemas/surveyResultAnswerParams'
           }
         }
       }

@@ -25,11 +25,19 @@ const makeSut = (): SutTypes => {
 }
 
 const makeFakeSurveyResultModel = (): SurveyResultModel => ({
-  id: 'any_id',
   surveyId: 'any_survey_id',
-  accountId: 'any_account_id',
-  answer: 'any_answer',
-  date: new Date()
+  date: new Date(),
+  answers: [{
+    answer: 'any_answer',
+    count: 1,
+    percent: 50
+  }, {
+    answer: 'other_answer',
+    image: 'any_image',
+    count: 10,
+    percent: 80
+  }],
+  question: 'any_question'
 })
 
 const makeFakeSaveSurveyResultModel = (): SaveSurveyResultParams => ({

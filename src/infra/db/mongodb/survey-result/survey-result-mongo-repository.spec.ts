@@ -1,4 +1,4 @@
-import { Collection } from 'mongodb'
+import { Collection, ObjectId } from 'mongodb'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import MockDate from 'mockdate'
 import { SurveyResultMongoRepository } from './survey-result-mongo-repository'
@@ -44,28 +44,20 @@ describe('Survey Result Mongo Repository', () => {
         date: new Date()
       })
       expect(surveyResult).toBeTruthy()
-      const testsCases = [
-        { field: 'accountId', value: account.insertedId.toString() },
-        { field: 'surveyId', value: survey.insertedId.toString() },
-        { field: 'answer', value: mockSurveyModel().answers[0].answer }
-      ]
-      testsCases.forEach(({ field, value }) => {
-        if (field !== 'answer') {
-          expect(surveyResult[field].toString()).toBe(value)
-        } else {
-          expect(surveyResult[field]).toBe(value)
-        }
-      })
-      expect(surveyResult.id).toBeTruthy()
+      expect(surveyResult.surveyId).toEqual(survey.insertedId)
+      expect(surveyResult.answers[0].count).toEqual(1)
+      expect(surveyResult.answers[0].percent).toEqual(100)
+      expect(surveyResult.answers[1].count).toEqual(0)
+      expect(surveyResult.answers[1].percent).toEqual(0)
     })
 
     test('Should update a survey result if its not new', async () => {
       const sut = makeSut()
       const accountFake = await accountCollection.insertOne(mockAccountModel())
       const surveyFake = await surveyCollection.insertOne(mockSurveyModel())
-      const res = await surveyResultCollection.insertOne({
-        surveyId: surveyFake.insertedId,
-        accountId: accountFake.insertedId,
+      surveyResultCollection.insertOne({
+        surveyId: new ObjectId(surveyFake.insertedId),
+        accountId: new ObjectId(accountFake.insertedId),
         answer: mockSurveyModel().answers[0].answer,
         date: new Date()
       })
@@ -76,19 +68,11 @@ describe('Survey Result Mongo Repository', () => {
         date: new Date()
       })
       expect(surveyResult).toBeTruthy()
-      const testsCases = [
-        { field: 'accountId', value: accountFake.insertedId.toString() },
-        { field: 'surveyId', value: surveyFake.insertedId.toString() },
-        { field: 'answer', value: mockSurveyModel().answers[1].answer }
-      ]
-      testsCases.forEach(({ field, value }) => {
-        if (field !== 'answer') {
-          expect(surveyResult[field].toString()).toBe(value)
-        } else {
-          expect(surveyResult[field]).toBe(value)
-        }
-      })
-      expect(surveyResult.id).toEqual(res.insertedId)
+      expect(surveyResult.surveyId).toEqual(surveyFake.insertedId)
+      expect(surveyResult.answers[1].count).toEqual(0)
+      expect(surveyResult.answers[1].percent).toEqual(0)
+      expect(surveyResult.answers[0].count).toEqual(1)
+      expect(surveyResult.answers[0].percent).toEqual(100)
     })
   })
 })

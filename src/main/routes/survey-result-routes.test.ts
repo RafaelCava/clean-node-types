@@ -122,7 +122,7 @@ describe('Survey Result Routes', () => {
         }],
         date: new Date()
       })
-      const surveyResult = await surveyResultCollection.insertOne({
+      await surveyResultCollection.insertOne({
         surveyId: survey.insertedId.toString(),
         accountId,
         answer: 'Answer 1',
@@ -135,9 +135,6 @@ describe('Survey Result Routes', () => {
           answer: 'Answer 2'
         })
         .expect(200)
-        .then(async (res) => {
-          expect(res.body.id).toBe(surveyResult.insertedId.toString())
-        })
     })
   })
 })
