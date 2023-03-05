@@ -55,10 +55,12 @@ jobs:
           tag: ${{ env.TAG_PROJECT }}
           message: "Latest release"
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag_exists_error: false
           
   application-deploy:
     needs: docker-deploy
     runs-on: ubuntu-latest
+    if: ${{ env.TAG_EXISTS }}" == false
     steps:
       - name: Deploy on render
         run: |
@@ -67,6 +69,7 @@ jobs:
   coveralls:
     needs: application-deploy
     runs-on: ubuntu-latest
+    if: ${{ env.TAG_EXISTS }}" == false
     steps:
       - uses: actions/checkout@v2.1.0
       - name: Set up Node.js ⚙️
