@@ -1,4 +1,4 @@
-export const signUpResultSchema = {
+export const saveSurveyParamsSchema = {
   type: 'object',
   properties: {
     id: {
