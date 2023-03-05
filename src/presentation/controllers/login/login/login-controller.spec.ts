@@ -61,7 +61,7 @@ describe('Login Controller', () => {
     const { sut } = makeSut()
     const httpRequest: HttpRequest = mockRequest()
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token', name: 'any_name' }))
   })
 
   test('Should return 400 if Validation throws an error', async () => {
