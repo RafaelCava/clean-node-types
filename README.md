@@ -7,7 +7,7 @@
 
 <h1 align="center">Clean Node Types</h1>
 <h3 align="center">
-<a href="https://clean-node-api-docker.onrender.com">Clique aqui</a>
+<a href="https://clean-node-api-docker.onrender.com/api-docs">Clique aqui</a>
 para acessar a documentação
 </h3>
 
