@@ -28,12 +28,11 @@ jobs:
       - name: Validate Tag Exists
         id: tag_validate
         run: |
-          echo validate=$(git tag -l ${{ env.TAG_PROJECT }}) >> "$GITHUB_OUTPUT"
+          git tag -l ${{ env.TAG_PROJECT }}
       
       - name: Create and push tag
         uses: rickstaa/action-create-tag@v1
         id: step_create_and_build_tag
-        if: steps.tag_validate.outputs.validate == ''
         with:
           tag: ${{ env.TAG_PROJECT }}
           message: "Latest release"
