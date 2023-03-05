@@ -144,5 +144,32 @@ describe('Survey Result Routes', () => {
         .get('/api/surveys/any_id/results')
         .expect(403)
     })
+
+    test('Should return 403 on loads survey result with invalid surveyId', async () => {
+      const { accessToken } = await makeAccessToken()
+      await request(app)
+        .get(`/api/surveys/${new ObjectId().toString()}/results`)
+        .set('x-access-token', accessToken)
+        .expect(403)
+    })
+
+    test('Should return 200 on load survey result with accessToken', async () => {
+      const { accessToken } = await makeAccessToken()
+      const survey = await surveyCollection.insertOne({
+        question: 'Question 1',
+        answers: [{
+          image: 'http://image-name.com',
+          answer: 'Answer 1'
+        },
+        {
+          answer: 'Answer 2'
+        }],
+        date: new Date()
+      })
+      await request(app)
+        .get(`/api/surveys/${survey.insertedId.toString()}/results`)
+        .set('x-access-token', accessToken)
+        .expect(200)
+    })
   })
 })
