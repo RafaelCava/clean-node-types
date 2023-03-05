@@ -1,5 +1,5 @@
 import { throwError } from '@/domain/test'
-import { mockValidation, mockAddSurvey } from '@/presentation/test'
+import { ValidationSpy, AddSurveySpy } from '@/presentation/test'
 import { badRequest, noContent, serverError } from '../../../helpers/http/http-helper'
 import { AddSurveyController } from './add-survey-controller'
 import { HttpRequest, Validation, AddSurvey } from './add-survey-controller-protocols'
@@ -11,8 +11,8 @@ type SutTypes = {
 }
 
 const makeSut = (): SutTypes => {
-  const validationStub = mockValidation()
-  const addSurveyStub = mockAddSurvey()
+  const validationStub = ValidationSpy()
+  const addSurveyStub = AddSurveySpy()
   const sut = new AddSurveyController(validationStub, addSurveyStub)
   return {
     sut,

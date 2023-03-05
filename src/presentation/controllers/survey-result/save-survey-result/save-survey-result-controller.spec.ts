@@ -5,7 +5,7 @@ import { serverError, forbidden, ok } from '@/presentation/helpers/http/http-hel
 import { LoadSurveyById } from '@/domain/usecases/survey/load-survey-by-id'
 import { InvalidParamError, MissingParamError } from '@/presentation/erros'
 import { mockSurveyResultModel, throwError } from '@/domain/test'
-import { mockLoadSurveyById, mockSaveSurveyResult } from '@/presentation/test'
+import { LoadSurveyByIdSpy, SaveSurveyResultSpy } from '@/presentation/test'
 
 type SutTypes = {
   sut: SaveSurveyResultController
@@ -14,8 +14,8 @@ type SutTypes = {
 }
 
 const makeSut = (): SutTypes => {
-  const saveSurveyResultStub = mockSaveSurveyResult()
-  const loadSurveyByIdStub = mockLoadSurveyById()
+  const saveSurveyResultStub = SaveSurveyResultSpy()
+  const loadSurveyByIdStub = LoadSurveyByIdSpy()
   const sut = new SaveSurveyResultController(loadSurveyByIdStub, saveSurveyResultStub)
   return {
     sut,

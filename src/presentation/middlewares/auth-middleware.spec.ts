@@ -3,7 +3,7 @@ import { HttpRequest, LoadAccountByToken } from './middleware-protocols'
 import { forbidden, ok, serverError } from '../helpers/http/http-helper'
 import { AccessDeniedError } from '../erros'
 import { throwError } from '@/domain/test'
-import { mockLoadAccountByToken } from '@/presentation/test'
+import { LoadAccountByTokenSpy } from '@/presentation/test'
 
 type SutTypes = {
   sut: AuthMiddleware
@@ -11,7 +11,7 @@ type SutTypes = {
 }
 
 const makeSut = (role?: string): SutTypes => {
-  const loadAccountByTokenStub = mockLoadAccountByToken()
+  const loadAccountByTokenStub = LoadAccountByTokenSpy()
   const sut = new AuthMiddleware(loadAccountByTokenStub, role)
   return {
     sut,

@@ -3,7 +3,7 @@ import { MissingParamError } from '../../../erros'
 import { badRequest, ok, serverError, unauthorized } from '../../../helpers/http/http-helper'
 import { LoginController } from './login-controller'
 import { throwError } from '@/domain/test'
-import { mockAuthentication, mockValidation } from '@/presentation/test'
+import { AuthenticationSpy, ValidationSpy } from '@/presentation/test'
 
 type SutTypes = {
   sut: LoginController
@@ -12,8 +12,8 @@ type SutTypes = {
 }
 
 const makeSut = (): SutTypes => {
-  const authenticationStub = mockAuthentication()
-  const validationStub = mockValidation()
+  const authenticationStub = AuthenticationSpy()
+  const validationStub = ValidationSpy()
   const sut = new LoginController(authenticationStub, validationStub)
   return {
     sut,

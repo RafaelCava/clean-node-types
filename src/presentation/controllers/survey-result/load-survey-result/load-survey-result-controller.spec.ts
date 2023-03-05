@@ -1,7 +1,7 @@
 import { mockSurveyResultModel, throwError } from '@/domain/test'
 import { InvalidParamError } from '@/presentation/erros'
 import { forbidden, ok, serverError } from '@/presentation/helpers/http/http-helper'
-import { mockLoadSurveyById, mockLoadSurveyResult } from '@/presentation/test'
+import { LoadSurveyByIdSpy, LoadSurveyResultSpy } from '@/presentation/test'
 import MockDate from 'mockdate'
 import { LoadSurveyResultController } from './load-survey-result-controller'
 import { HttpRequest, LoadSurveyById, LoadSurveyResult } from './load-survey-result-controller-protocols'
@@ -13,8 +13,8 @@ type SutTypes = {
 }
 
 const makeSut = (): SutTypes => {
-  const loadSurveyResultStub = mockLoadSurveyResult()
-  const loadSurveyByIdStub = mockLoadSurveyById()
+  const loadSurveyResultStub = LoadSurveyResultSpy()
+  const loadSurveyByIdStub = LoadSurveyByIdSpy()
   const sut = new LoadSurveyResultController(loadSurveyByIdStub, loadSurveyResultStub)
   return {
     sut,
