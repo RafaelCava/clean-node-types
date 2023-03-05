@@ -67,9 +67,9 @@ jobs:
           curl ${{ secrets.WEBHOOK_RENDER }}
 
   coveralls:
-    needs: application-deploy
+    needs: docker-deploy
     runs-on: ubuntu-latest
-    if: "${{ env.TAG_EXISTS == false }}"
+    if: needs.docker-deploy.outputs.tag_exists == 'false'
     steps:
       - uses: actions/checkout@v2.1.0
       - name: Set up Node.js ⚙️
