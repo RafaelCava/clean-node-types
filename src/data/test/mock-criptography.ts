@@ -3,7 +3,7 @@ import { Encrypter } from '@/data/protocols/criptography/encrypter'
 import { HashComparer } from '@/data/protocols/criptography/hash-comparer'
 import { Hasher } from '@/data/protocols/criptography/hasher'
 
-export const mockHasher = (): Hasher => {
+export const HasherSpy = (): Hasher => {
   class HasherStub implements Hasher {
     async hash (value: string): Promise<string> {
       return Promise.resolve('hashed_password')
@@ -12,7 +12,7 @@ export const mockHasher = (): Hasher => {
   return new HasherStub()
 }
 
-export const mockDecrypter = (): Decrypter => {
+export const DecrypterSpy = (): Decrypter => {
   class DecrypterStub implements Decrypter {
     async decrypt (value: string): Promise<string> {
       return Promise.resolve('any_value')
@@ -21,7 +21,7 @@ export const mockDecrypter = (): Decrypter => {
   return new DecrypterStub()
 }
 
-export const mockEncrypter = (): Encrypter => {
+export const EncrypterSpy = (): Encrypter => {
   class EncrypterStub implements Encrypter {
     async encrypt (id: string): Promise<string> {
       return Promise.resolve('any_token')
@@ -30,7 +30,7 @@ export const mockEncrypter = (): Encrypter => {
   return new EncrypterStub()
 }
 
-export const mockHashComparer = (): HashComparer => {
+export const HashComparerSpy = (): HashComparer => {
   class HashComparerStub implements HashComparer {
     async compare (value: string, hash: string): Promise<boolean> {
       return Promise.resolve(true)

@@ -7,7 +7,7 @@ import {
   Authentication
 } from './signup-controller-protocols'
 import { badRequest, forbidden, ok, serverError } from '../../../helpers/http/http-helper'
-import { mockAuthentication, mockValidation, mockAddAccount } from '@/presentation/test'
+import { AuthenticationSpy, ValidationSpy, AddAccountSpy } from '@/presentation/test'
 
 type SutTypes = {
   sut: SignUpController
@@ -17,9 +17,9 @@ type SutTypes = {
 }
 
 const makeSut = (): SutTypes => {
-  const addAccountStub = mockAddAccount()
-  const validationStub = mockValidation()
-  const authenticationStub = mockAuthentication()
+  const addAccountStub = AddAccountSpy()
+  const validationStub = ValidationSpy()
+  const authenticationStub = AuthenticationSpy()
   const sut = new SignUpController(addAccountStub, validationStub, authenticationStub)
   return { sut, validationStub, addAccountStub, authenticationStub }
 }
