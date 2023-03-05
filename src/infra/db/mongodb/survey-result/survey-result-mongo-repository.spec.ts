@@ -1,4 +1,4 @@
-import { Collection } from 'mongodb'
+import { Collection, ObjectId } from 'mongodb'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import MockDate from 'mockdate'
 import { SurveyResultMongoRepository } from './survey-result-mongo-repository'
@@ -37,58 +37,66 @@ describe('Survey Result Mongo Repository', () => {
       const sut = makeSut()
       const account = await accountCollection.insertOne(mockAccountModel())
       const survey = await surveyCollection.insertOne(mockSurveyModel())
-      const surveyResult = await sut.save({
+      await sut.save({
         surveyId: survey.insertedId as unknown as string,
         accountId: account.insertedId as unknown as string,
         answer: mockSurveyModel().answers[0].answer,
         date: new Date()
       })
-      expect(surveyResult).toBeTruthy()
-      const testsCases = [
-        { field: 'accountId', value: account.insertedId.toString() },
-        { field: 'surveyId', value: survey.insertedId.toString() },
-        { field: 'answer', value: mockSurveyModel().answers[0].answer }
-      ]
-      testsCases.forEach(({ field, value }) => {
-        if (field !== 'answer') {
-          expect(surveyResult[field].toString()).toBe(value)
-        } else {
-          expect(surveyResult[field]).toBe(value)
-        }
-      })
-      expect(surveyResult.id).toBeTruthy()
+      const saveResult = await surveyResultCollection.findOne({ surveyId: survey.insertedId, accountId: account.insertedId })
+      expect(saveResult).toBeTruthy()
+      expect(saveResult.answer).toBe(mockSurveyModel().answers[0].answer)
     })
 
     test('Should update a survey result if its not new', async () => {
       const sut = makeSut()
       const accountFake = await accountCollection.insertOne(mockAccountModel())
       const surveyFake = await surveyCollection.insertOne(mockSurveyModel())
-      const res = await surveyResultCollection.insertOne({
-        surveyId: surveyFake.insertedId,
-        accountId: accountFake.insertedId,
+      surveyResultCollection.insertOne({
+        surveyId: new ObjectId(surveyFake.insertedId),
+        accountId: new ObjectId(accountFake.insertedId),
         answer: mockSurveyModel().answers[0].answer,
         date: new Date()
       })
-      const surveyResult = await sut.save({
+      await sut.save({
         surveyId: surveyFake.insertedId as unknown as string,
         accountId: accountFake.insertedId as unknown as string,
         answer: mockSurveyModel().answers[1].answer,
         date: new Date()
       })
-      expect(surveyResult).toBeTruthy()
-      const testsCases = [
-        { field: 'accountId', value: accountFake.insertedId.toString() },
-        { field: 'surveyId', value: surveyFake.insertedId.toString() },
-        { field: 'answer', value: mockSurveyModel().answers[1].answer }
-      ]
-      testsCases.forEach(({ field, value }) => {
-        if (field !== 'answer') {
-          expect(surveyResult[field].toString()).toBe(value)
-        } else {
-          expect(surveyResult[field]).toBe(value)
-        }
+      const saveResult = await surveyResultCollection.findOne({ surveyId: surveyFake.insertedId, accountId: accountFake.insertedId })
+      expect(saveResult).toBeTruthy()
+      expect(saveResult.answer).toBe(mockSurveyModel().answers[1].answer)
+    })
+  })
+
+  describe('loadBySurveyId()', () => {
+    test('Should return null if not have surveyResult', async () => {
+      const sut = makeSut()
+      const surveyFake = await surveyCollection.insertOne(mockSurveyModel())
+      const surveyResult = await sut.loadBySurveyId(surveyFake.insertedId.toString())
+      expect(surveyResult).toBeNull()
+    })
+
+    test('Should load survey result', async () => {
+      const sut = makeSut()
+      const accountFake = await accountCollection.insertOne(mockAccountModel())
+      const surveyFake = await surveyCollection.insertOne(mockSurveyModel())
+      await sut.save({
+        surveyId: surveyFake.insertedId as unknown as string,
+        accountId: accountFake.insertedId as unknown as string,
+        answer: mockSurveyModel().answers[1].answer,
+        date: new Date()
       })
-      expect(surveyResult.id).toEqual(res.insertedId)
+      const surveyResult = await sut.loadBySurveyId(surveyFake.insertedId.toString())
+      expect(surveyResult).toBeTruthy()
+      expect(surveyResult.answers[0].answer).toBe(mockSurveyModel().answers[1].answer)
+      expect(surveyResult.answers[0].percent).toBe(100)
+      expect(surveyResult.answers[0].count).toBe(1)
+      expect(surveyResult.answers[1].percent).toBe(0)
+      expect(surveyResult.answers[1].count).toBe(0)
+      expect(surveyResult.answers[2].percent).toBe(0)
+      expect(surveyResult.answers[2].count).toBe(0)
     })
   })
 })

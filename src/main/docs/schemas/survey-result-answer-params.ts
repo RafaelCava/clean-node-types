@@ -1,9 +1,6 @@
-export const surveyAnswerSchema = {
+export const surveyResultAnswerParams = {
   type: 'object',
   properties: {
-    image: {
-      type: 'string'
-    },
     answer: {
       type: 'string'
     }
