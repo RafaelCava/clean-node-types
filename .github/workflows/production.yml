@@ -24,10 +24,16 @@ jobs:
         id: step_get_tag
         run: |
           echo TAG_PROJECT=$(git log -1 --decorate=short --pretty=format:'%s' | grep 'elease/[0-9]\{1,3\}.[0-9]\{1,3\}.[0-9]\{1,3\}' -oh | awk -F/ '{print $2}') >> $GITHUB_ENV
+
+      - name: Validate Tag Exists
+        id: tag_validate
+        run: |
+          echo validate=$(git tag -l ${{ env.TAG_PROJECT }}) >> "$GITHUB_OUTPUT"
       
       - name: Create and push tag
         uses: rickstaa/action-create-tag@v1
         id: step_create_and_build_tag
+        if: steps.tag_validate.outputs.validate == ''
         with:
           tag: ${{ env.TAG_PROJECT }}
           message: "Latest release"
