@@ -1,6 +1,6 @@
-import { throwError } from '@/domain/test'
+import { mockSurveyResultModel, throwError } from '@/domain/test'
 import { LoadSurveyResult } from '@/domain/usecases/survey-result/load-survey-result'
-import { serverError } from '@/presentation/helpers/http/http-helper'
+import { ok, serverError } from '@/presentation/helpers/http/http-helper'
 import { mockLoadSurveyResult } from '@/presentation/test'
 import MockDate from 'mockdate'
 import { HttpRequest } from '../save-survey-result/save-survey-result-controller-protocols'
@@ -51,5 +51,18 @@ describe('SaveSurveyResult Controller', () => {
     const httpRequest = mockFakeRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should returns 200 if LoadSurveyResult returns empty values', async () => {
+    const { sut } = makeSut()
+    const httpRequest = mockFakeRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(ok(mockSurveyResultModel()))
+    expect(httpResponse.body.answers[0].count).toBe(0)
+    expect(httpResponse.body.answers[0].percent).toBe(0)
+    expect(httpResponse.body.answers[1].count).toBe(0)
+    expect(httpResponse.body.answers[1].percent).toBe(0)
+    expect(httpResponse.body.answers[2].count).toBe(0)
+    expect(httpResponse.body.answers[2].percent).toBe(0)
   })
 })
