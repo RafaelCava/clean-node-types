@@ -60,7 +60,7 @@ jobs:
   application-deploy:
     needs: docker-deploy
     runs-on: ubuntu-latest
-    if: ${{ env.TAG_EXISTS }} == false
+    if: "${{ env.TAG_EXISTS == 'false' }}"
     steps:
       - name: Deploy on render
         run: |
