@@ -60,7 +60,7 @@ jobs:
   application-deploy:
     needs: docker-deploy
     runs-on: ubuntu-latest
-    if: "${{ env.TAG_EXISTS == 'false' }}"
+    if: needs.docker-deploy.outputs.tag_exists == 'false'
     steps:
       - name: Deploy on render
         run: |
@@ -69,7 +69,7 @@ jobs:
   coveralls:
     needs: application-deploy
     runs-on: ubuntu-latest
-    if: ${{ env.TAG_EXISTS }}" == false
+    if: "${{ env.TAG_EXISTS == false }}"
     steps:
       - uses: actions/checkout@v2.1.0
       - name: Set up Node.js ⚙️
