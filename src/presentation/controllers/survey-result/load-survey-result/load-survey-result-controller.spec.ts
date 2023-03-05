@@ -1,11 +1,10 @@
 import { mockSurveyResultModel, throwError } from '@/domain/test'
-import { LoadSurveyResult } from '@/domain/usecases/survey-result/load-survey-result'
 import { InvalidParamError } from '@/presentation/erros'
 import { forbidden, ok, serverError } from '@/presentation/helpers/http/http-helper'
 import { mockLoadSurveyById, mockLoadSurveyResult } from '@/presentation/test'
 import MockDate from 'mockdate'
-import { HttpRequest, LoadSurveyById } from '../save-survey-result/save-survey-result-controller-protocols'
 import { LoadSurveyResultController } from './load-survey-result-controller'
+import { HttpRequest, LoadSurveyById, LoadSurveyResult } from './load-survey-result-controller-protocols'
 
 type SutTypes = {
   sut: LoadSurveyResultController
@@ -57,6 +56,14 @@ describe('SaveSurveyResult Controller', () => {
     expect(res).toEqual(forbidden(new InvalidParamError('surveyId')))
   })
 
+  test('Should returns 500 if LoadSurveyById throws', async () => {
+    const { sut, loadSurveyByIdStub } = makeSut()
+    jest.spyOn(loadSurveyByIdStub, 'loadById').mockImplementationOnce(throwError)
+    const httpRequest = mockFakeRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
   test('Should call LoadSurveyResult', async () => {
     const { sut, loadSurveyResultStub } = makeSut()
     const loadByIdSpy = jest.spyOn(loadSurveyResultStub, 'load')
@@ -78,11 +85,9 @@ describe('SaveSurveyResult Controller', () => {
     const httpRequest = mockFakeRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(ok(mockSurveyResultModel()))
-    expect(httpResponse.body.answers[0].count).toBe(0)
-    expect(httpResponse.body.answers[0].percent).toBe(0)
-    expect(httpResponse.body.answers[1].count).toBe(0)
-    expect(httpResponse.body.answers[1].percent).toBe(0)
-    expect(httpResponse.body.answers[2].count).toBe(0)
-    expect(httpResponse.body.answers[2].percent).toBe(0)
+    for (const item of [0, 1, 2]) {
+      expect(httpResponse.body.answers[item].count).toBe(0)
+      expect(httpResponse.body.answers[item].percent).toBe(0)
+    }
   })
 })

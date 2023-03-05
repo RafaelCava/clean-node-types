@@ -24,7 +24,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makeFakeSaveSurveyResultModel = (): SaveSurveyResultParams => ({
+const mockSaveSurveyResultModel = (): SaveSurveyResultParams => ({
   surveyId: 'any_survey_id',
   accountId: 'any_account_id',
   answer: 'any_answer',
@@ -102,7 +102,7 @@ describe('SaveSurveyResult Controller', () => {
     const saveSpy = jest.spyOn(saveSurveyResultStub, 'save')
     const httpRequest = mockFakeRequest()
     await sut.handle(httpRequest)
-    expect(saveSpy).toHaveBeenCalledWith(makeFakeSaveSurveyResultModel())
+    expect(saveSpy).toHaveBeenCalledWith(mockSaveSurveyResultModel())
   })
 
   test('Should returns 500 if SaveSurveyResult throws', async () => {
