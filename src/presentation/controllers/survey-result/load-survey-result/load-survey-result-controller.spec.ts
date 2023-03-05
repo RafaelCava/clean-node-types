@@ -1,4 +1,6 @@
+import { throwError } from '@/domain/test'
 import { LoadSurveyResult } from '@/domain/usecases/survey-result/load-survey-result'
+import { serverError } from '@/presentation/helpers/http/http-helper'
 import { mockLoadSurveyResult } from '@/presentation/test'
 import MockDate from 'mockdate'
 import { HttpRequest } from '../save-survey-result/save-survey-result-controller-protocols'
@@ -41,5 +43,13 @@ describe('SaveSurveyResult Controller', () => {
     const httpRequest = mockFakeRequest()
     await sut.handle(httpRequest)
     expect(loadByIdSpy).toHaveBeenCalledWith('any_survey_id')
+  })
+
+  test('Should returns 500 if LoadSurveyResult throws', async () => {
+    const { sut, loadSurveyResultStub } = makeSut()
+    jest.spyOn(loadSurveyResultStub, 'load').mockImplementationOnce(throwError)
+    const httpRequest = mockFakeRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
