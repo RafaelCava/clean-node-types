@@ -1,5 +1,5 @@
 import { mockSurveysModels, throwError } from '@/domain/test'
-import { mockLoadSurveys } from '@/presentation/test'
+import { LoadSurveysSpy } from '@/presentation/test'
 import MockDate from 'mockdate'
 import { noContent, ok, serverError } from '../../../helpers/http/http-helper'
 import { LoadSurveysController } from './load-surveys-controller'
@@ -11,7 +11,7 @@ type SutTypes = {
 }
 
 const makeSut = (): SutTypes => {
-  const loadSurveysStub = mockLoadSurveys()
+  const loadSurveysStub = LoadSurveysSpy()
   const sut = new LoadSurveysController(loadSurveysStub)
   return {
     sut,
