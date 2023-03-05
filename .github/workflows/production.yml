@@ -22,11 +22,6 @@ jobs:
         id: step_get_tag
         run: |
           echo TAG_PROJECT=$(git log -1 --decorate=short --pretty=format:'%s' | grep 'elease/[0-9]\{1,3\}.[0-9]\{1,3\}.[0-9]\{1,3\}' -oh | awk -F/ '{print $2}') >> $GITHUB_ENV
-
-      - name: Check TAG
-        id: step_check_tag
-        run: |
-          echo "${{ env.TAG_PROJECT }}"
       
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
