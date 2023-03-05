@@ -7,6 +7,8 @@ on:
 jobs:
   docker-deploy:
     runs-on: ubuntu-latest
+    outputs:
+      tag_validate: ${{steps.step_create_and_build_tag.outputs.tag_exists}}
     permissions:
       contents: write
       packages: write
@@ -59,7 +61,7 @@ jobs:
   application-deploy:
     needs: docker-deploy
     runs-on: ubuntu-latest
-    if: needs.docker-deploy.outputs.tag_exists == 'false'
+    if: needs.docker-deploy.outputs.tag_validate == 'false'
     steps:
       - name: Deploy on render
         run: |
@@ -68,7 +70,7 @@ jobs:
   coveralls:
     needs: docker-deploy
     runs-on: ubuntu-latest
-    if: needs.docker-deploy.outputs.tag_exists == 'false'
+    if: needs.docker-deploy.outputs.tag_validate == 'false'
     steps:
       - uses: actions/checkout@v2.1.0
       - name: Set up Node.js ⚙️
