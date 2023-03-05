@@ -1,6 +1,7 @@
 import { mockSurveyResultModel, throwError } from '@/domain/test'
 import { LoadSurveyResult } from '@/domain/usecases/survey-result/load-survey-result'
-import { ok, serverError } from '@/presentation/helpers/http/http-helper'
+import { InvalidParamError } from '@/presentation/erros'
+import { forbidden, ok, serverError } from '@/presentation/helpers/http/http-helper'
 import { mockLoadSurveyById, mockLoadSurveyResult } from '@/presentation/test'
 import MockDate from 'mockdate'
 import { HttpRequest, LoadSurveyById } from '../save-survey-result/save-survey-result-controller-protocols'
@@ -46,6 +47,14 @@ describe('SaveSurveyResult Controller', () => {
     const httpRequest = mockFakeRequest()
     await sut.handle(httpRequest)
     expect(loadByIdSpy).toHaveBeenCalledWith('any_survey_id')
+  })
+
+  test('Should returns 403 if LoadSurveyById returns null', async () => {
+    const { sut, loadSurveyByIdStub } = makeSut()
+    jest.spyOn(loadSurveyByIdStub, 'loadById').mockReturnValueOnce(Promise.resolve(null))
+    const httpRequest = mockFakeRequest()
+    const res = await sut.handle(httpRequest)
+    expect(res).toEqual(forbidden(new InvalidParamError('surveyId')))
   })
 
   test('Should call LoadSurveyResult', async () => {
