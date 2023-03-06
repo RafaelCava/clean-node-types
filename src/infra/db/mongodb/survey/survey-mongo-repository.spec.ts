@@ -2,8 +2,11 @@ import { SurveyMongoRepository } from './survey-mongo-repository'
 import { Collection, ObjectId } from 'mongodb'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import MockDate from 'mockdate'
+import { mockAccountModel, mockAddSurveyParams } from '@/domain/test'
 
 let surveyCollection: Collection
+let accountCollection: Collection
+let surveyResultCollection: Collection
 
 const makeSut = (): SurveyMongoRepository => {
   return new SurveyMongoRepository()
@@ -23,6 +26,10 @@ describe('Survey Mongo Repository', () => {
   beforeEach(async () => {
     surveyCollection = await MongoHelper.getCollection('surveys')
     await surveyCollection.deleteMany({})
+    accountCollection = await MongoHelper.getCollection('accounts')
+    await accountCollection.deleteMany({})
+    surveyResultCollection = await MongoHelper.getCollection('surveyResults')
+    await surveyResultCollection.deleteMany({})
   })
 
   describe('add()', () => {
@@ -48,37 +55,28 @@ describe('Survey Mongo Repository', () => {
   describe('loadAll()', () => {
     test('Should return all surveys on success', async () => {
       const sut = makeSut()
-      await surveyCollection.insertMany([{
-        question: 'any_question_1',
-        answers: [{
-          image: 'any_image_1',
-          answer: 'any_answer_1'
-        },
-        {
-          answer: 'other_answer_1'
-        }],
+      const account = await accountCollection.insertOne(mockAccountModel())
+      const addSurveyModels = [mockAddSurveyParams(), mockAddSurveyParams()]
+      const result = await surveyCollection.insertMany(addSurveyModels)
+      await surveyResultCollection.insertOne({
+        accountId: account.insertedId,
+        surveyId: result.insertedIds[0],
+        answer: addSurveyModels[0].answers[0].answer,
         date: new Date()
-      },
-      {
-        question: 'any_question_2',
-        answers: [{
-          image: 'any_image_2',
-          answer: 'any_answer_2'
-        },
-        {
-          answer: 'other_answer_2'
-        }],
-        date: new Date()
-      }])
-      const surveysFound = await surveyCollection.find().toArray()
-      const surveys = await sut.loadAll()
+      })
+      const surveys = await sut.loadAll(account.insertedId.toString())
+      expect(surveys.length).toBe(2)
       expect(surveys[0].id).toBeTruthy()
-      expect(surveys).toEqual(MongoHelper.map(surveysFound))
+      expect(surveys[0].question).toBe(addSurveyModels[0].question)
+      expect(surveys[0].didAnswer).toBe(true)
+      expect(surveys[1].question).toBe(addSurveyModels[1].question)
+      expect(surveys[1].didAnswer).toBe(false)
     })
 
     test('Should load a empty list', async () => {
+      const account = await accountCollection.insertOne(mockAccountModel())
       const sut = makeSut()
-      const surveys = await sut.loadAll()
+      const surveys = await sut.loadAll(account.insertedId.toString())
       expect(surveys.length).toBe(0)
     })
   })

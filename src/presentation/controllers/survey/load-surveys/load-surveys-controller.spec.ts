@@ -22,7 +22,8 @@ const makeSut = (): SutTypes => {
 const mockRequest = (): HttpRequest => ({
   headers: {
     'x-access-token': 'any_token'
-  }
+  },
+  accountId: 'any_account_id'
 })
 
 describe('LoadSurveys Controller', () => {
@@ -37,7 +38,7 @@ describe('LoadSurveys Controller', () => {
     const { sut, loadSurveysStub } = makeSut()
     const loadSpy = jest.spyOn(loadSurveysStub, 'load')
     await sut.handle(mockRequest())
-    expect(loadSpy).toHaveBeenCalled()
+    expect(loadSpy).toHaveBeenCalledWith(mockRequest().accountId)
   })
 
   test('Should return 500 if LoadSurveys throws', async () => {

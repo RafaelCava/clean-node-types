@@ -10,6 +10,9 @@ export const surveySchema = {
     date: {
       type: 'string'
     },
+    didAnswer: {
+      type: 'boolean'
+    },
     answers: {
       type: 'array',
       items: {
