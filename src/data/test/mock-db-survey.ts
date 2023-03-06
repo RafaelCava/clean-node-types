@@ -25,7 +25,7 @@ export const LoadSurveyByIdRepositorySpy = (): LoadSurveyByIdRepository => {
 
 export const LoadSurveysRepositorySpy = (): LoadSurveysRepository => {
   class LoadSurveysRepositoryStub implements LoadSurveysRepository {
-    async loadAll (): Promise<SurveyModel[]> {
+    async loadAll (accountId: string): Promise<SurveyModel[]> {
       return Promise.resolve(mockSurveysModels())
     }
   }
