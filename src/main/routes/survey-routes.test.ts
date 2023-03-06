@@ -82,7 +82,7 @@ describe('Survey Routes', () => {
             answer: 'Answer 2'
           }]
         })
-        .expect(500)
+        .expect(403)
     })
 
     test('Should return 500 on add survey with invalid signature accessToken', async () => {
@@ -99,7 +99,7 @@ describe('Survey Routes', () => {
             answer: 'Answer 2'
           }]
         })
-        .expect(500)
+        .expect(403)
     })
 
     test('Should return 403 on add survey with invalid accessToken', async () => {
