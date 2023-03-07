@@ -28,8 +28,8 @@ const mockRequest = (): HttpRequest => ({
   body: {
     name: 'any_name',
     email: 'any_email@mail.com',
-    password: 'any_password',
-    passwordConfirmation: 'any_password'
+    password: 'any_value',
+    passwordConfirmation: 'any_value'
   }
 })
 
@@ -65,7 +65,7 @@ describe('SignUp Controller', () => {
     expect(addSpy).toHaveBeenCalledWith({
       name: 'any_name',
       email: 'any_email@mail.com',
-      password: 'any_password'
+      password: 'any_value'
     })
   })
 
@@ -89,7 +89,7 @@ describe('SignUp Controller', () => {
     await sut.handle(httpRequest)
     expect(authSpy).toHaveBeenCalledWith({
       email: 'any_email@mail.com',
-      password: 'any_password'
+      password: 'any_value'
     })
   })
 

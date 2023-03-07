@@ -33,7 +33,7 @@ describe('Survey Routes', () => {
         .send({
           question: 'Question',
           answers: [{
-            image: 'http://image-name.com',
+            image: 'https://image-name.com',
             answer: 'Answer 1'
           },
           {
@@ -47,7 +47,7 @@ describe('Survey Routes', () => {
       const result = await accountCollection.insertOne({
         name: 'Rafael',
         email: 'rafael.cavalcante@gmail.com',
-        password: '1234',
+        password: 'any_value',
         role: 'admin'
       })
       const accessToken = sign({ id: result.insertedId }, env.jwtSecret)
@@ -58,7 +58,7 @@ describe('Survey Routes', () => {
         .send({
           question: 'Question',
           answers: [{
-            image: 'http://image-name.com',
+            image: 'https://image-name.com',
             answer: 'Answer 1'
           },
           {
@@ -75,7 +75,7 @@ describe('Survey Routes', () => {
         .send({
           question: 'Question',
           answers: [{
-            image: 'http://image-name.com',
+            image: 'https://image-name.com',
             answer: 'Answer 1'
           },
           {
@@ -88,11 +88,11 @@ describe('Survey Routes', () => {
     test('Should return 500 on add survey with invalid signature accessToken', async () => {
       await request(app)
         .post('/api/surveys')
-        .set('x-access-token', sign({ id: 'invalid_id' }, '1234'))
+        .set('x-access-token', sign({ id: 'invalid_id' }, 'any_value'))
         .send({
           question: 'Question',
           answers: [{
-            image: 'http://image-name.com',
+            image: 'https://image-name.com',
             answer: 'Answer 1'
           },
           {
@@ -109,7 +109,7 @@ describe('Survey Routes', () => {
         .send({
           question: 'Question',
           answers: [{
-            image: 'http://image-name.com',
+            image: 'https://image-name.com',
             answer: 'Answer 1'
           },
           {
@@ -131,14 +131,14 @@ describe('Survey Routes', () => {
       const result = await accountCollection.insertOne({
         name: 'Rafael',
         email: 'rafael.cavalcante@gmail.com',
-        password: '1234',
+        password: 'any_value',
         role: 'admin'
       })
       surveyCollection.insertMany([
         {
           question: 'Question',
           answers: [{
-            image: 'http://image-name.com',
+            image: 'https://image-name.com',
             answer: 'Answer 1'
           },
           {
@@ -149,7 +149,7 @@ describe('Survey Routes', () => {
         {
           question: 'Question 2',
           answers: [{
-            image: 'http://image-name.com',
+            image: 'https://image-name.com',
             answer: 'Answer 1'
           },
           {
@@ -170,7 +170,7 @@ describe('Survey Routes', () => {
       const result = await accountCollection.insertOne({
         name: 'Rafael',
         email: 'rafael.cavalcante@gmail.com',
-        password: '1234',
+        password: 'any_value',
         role: 'admin'
       })
       const accessToken = sign({ id: result.insertedId }, env.jwtSecret)
