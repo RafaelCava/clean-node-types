@@ -14,7 +14,7 @@ const makeAccessToken = async (): Promise<any> => {
   const result = await accountCollection.insertOne({
     name: 'Rafael',
     email: 'rafael.cavalcante@gmail.com',
-    password: '1234',
+    password: 'any_value',
     role: 'admin'
   })
   const accessToken = sign({ id: result.insertedId }, env.jwtSecret)
@@ -70,7 +70,7 @@ describe('Survey Result Routes', () => {
       const survey = await surveyCollection.insertOne({
         question: 'Question 2',
         answers: [{
-          image: 'http://image-name.com',
+          image: 'https://image-name.com',
           answer: 'Answer 1'
         },
         {
@@ -92,7 +92,7 @@ describe('Survey Result Routes', () => {
       const survey = await surveyCollection.insertOne({
         question: 'Question 2',
         answers: [{
-          image: 'http://image-name.com',
+          image: 'https://image-name.com',
           answer: 'Answer 1'
         },
         {
@@ -114,7 +114,7 @@ describe('Survey Result Routes', () => {
       const survey = await surveyCollection.insertOne({
         question: 'Question 2',
         answers: [{
-          image: 'http://image-name.com',
+          image: 'https://image-name.com',
           answer: 'Answer 1'
         },
         {
@@ -158,7 +158,7 @@ describe('Survey Result Routes', () => {
       const survey = await surveyCollection.insertOne({
         question: 'Question 1',
         answers: [{
-          image: 'http://image-name.com',
+          image: 'https://image-name.com',
           answer: 'Answer 1'
         },
         {

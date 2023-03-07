@@ -26,8 +26,8 @@ describe('Login Routes', () => {
         .send({
           name: 'Rafael',
           email: 'rafael.cavalcante@gmail.com',
-          password: '1234',
-          passwordConfirmation: '1234'
+          password: 'any_value',
+          passwordConfirmation: 'any_value'
         })
         .expect(200)
     })
@@ -38,7 +38,7 @@ describe('Login Routes', () => {
         .send({
           name: 'Rafael',
           email: 'rafael.cavalcante@gmail.com',
-          password: '1234'
+          password: 'any_value'
         })
         .expect(400)
     })
@@ -49,7 +49,7 @@ describe('Login Routes', () => {
         .send({
           name: 'Rafael',
           email: 'rafael.cavalcante@gmail.com',
-          password: '1234'
+          password: 'any_value'
         })
         .expect(400)
         .then(res => {
@@ -61,7 +61,7 @@ describe('Login Routes', () => {
 
   describe('POST /login', () => {
     test('Should return 200 on login', async () => {
-      const password = await hash('1234', 12)
+      const password = await hash('any_value', 12)
       await accountCollection.insertOne({
         name: 'Rafael',
         email: 'rafael.cavalcante@gmail.com',
@@ -71,7 +71,7 @@ describe('Login Routes', () => {
         .post('/api/login')
         .send({
           email: 'rafael.cavalcante@gmail.com',
-          password: '1234'
+          password: 'any_value'
         })
         .expect(200)
     })
@@ -81,13 +81,13 @@ describe('Login Routes', () => {
         .post('/api/login')
         .send({
           email: 'rafael.cavalcante@gmail.com',
-          password: '1234'
+          password: 'any_value'
         })
         .expect(401)
     })
 
     test('Should return 401 if invalid password are provided', async () => {
-      const password = await hash('1234', 12)
+      const password = await hash('any_value', 12)
       await accountCollection.insertOne({
         name: 'Rafael',
         email: 'rafael.cavalcante@gmail.com',
@@ -97,13 +97,13 @@ describe('Login Routes', () => {
         .post('/api/login')
         .send({
           email: 'rafael.cavalcante@gmail.com',
-          password: '12345'
+          password: 'any_value5'
         })
         .expect(401)
     })
 
     test('Should return a accessToken on body if succeeds', async () => {
-      const password = await hash('1234', 12)
+      const password = await hash('any_value', 12)
       await accountCollection.insertOne({
         name: 'Rafael',
         email: 'rafael.cavalcante@gmail.com',
@@ -113,7 +113,7 @@ describe('Login Routes', () => {
         .post('/api/login')
         .send({
           email: 'rafael.cavalcante@gmail.com',
-          password: '1234'
+          password: 'any_value'
         })
         .expect(200)
         .then(res => {
@@ -127,7 +127,7 @@ describe('Login Routes', () => {
         .post('/api/login')
         .send({
           email: 'rafael.cavalcante@gmail.com',
-          password: '1234'
+          password: 'any_value'
         })
         .expect(401)
         .then(res => {
