@@ -84,13 +84,7 @@ jobs:
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: fix code coverage paths
-        working-directory: ./coverage
-        run: |
-          sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' lcov.info
-      
+          github-token: ${{ secrets.GITHUB_TOKEN }}      
 
       - name: Analyze with SonarQube
 
