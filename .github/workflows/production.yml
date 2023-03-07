@@ -67,7 +67,7 @@ jobs:
         run: |
           curl ${{ secrets.WEBHOOK_RENDER }}
 
-  coveralls:
+  coveralls-and-sonarcloud:
     needs: docker-deploy
     runs-on: ubuntu-latest
     if: needs.docker-deploy.outputs.tag_validate == 'false'
@@ -85,4 +85,12 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Analyze with SonarQube
+
+        uses: SonarSource/sonarqube-scan-action@7295e71c9583053f5bf40e9d4068a0c974603ec8
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # Generate a token on SonarQube, add it to the secrets of this repo with the name SONAR_TOKEN (Settings > Secrets > Actions > add new repository secret)
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}   
   
