@@ -86,6 +86,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       
+      - name: fix code coverage paths
+        working-directory: ./coverage
+        run: |
+          sed -i 's/\/home\/runner\/work\/clean-node-types\/clean-node-types\//\/github\/workspace\//g' lcov.info
+      
       - name: Analyze with SonarQube
 
         uses: SonarSource/sonarqube-scan-action@7295e71c9583053f5bf40e9d4068a0c974603ec8
