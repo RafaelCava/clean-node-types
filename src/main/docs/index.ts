@@ -7,7 +7,7 @@ export default {
   info: {
     title: 'Clean Node API',
     description: 'API do curso do Mango para realizar enquetes entre programadores',
-    version: '2.6.13',
+    version: '2.6.14',
     license: {
       name: 'MIT',
       url: 'https://github.com/RafaelCava/clean-node-types/blob/master/LICENSE'
