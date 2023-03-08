@@ -22,7 +22,7 @@ para acessar a documentação
 
   <img alt="Coverage" src="https://coveralls.io/repos/github/RafaelCava/clean-node-types/badge.svg?branch=master">
 
-  [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=RafaelCava_clean-node-types&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=RafaelCava_clean-node-types)
+  <img alt="Quality Gate Status" src="https://sonarcloud.io/api/project_badges/measure?project=RafaelCava_clean-node-types&metric=alert_status" /> -->
 
   <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/RafaelCava/tdd-ddd-typerscript-node?color=56BEB8" /> -->
 
