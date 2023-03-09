@@ -1,8 +1,8 @@
 version: '3.7'
 
 networks:
-  clean-node-types:
-    driver: bridge
+  observability:
+    external: true
 
 services:
   clean-node-types:
@@ -16,13 +16,14 @@ services:
     environment:
       MONGO_URL: mongodb://root:root@mongo:27017/clean-node-api?authSource=admin
       PORT: 5050
+      ELASTIC_APM_SERVER_URL: http://apm:8200
     ports:
       - 5050:5050
       - 9222:9222
     volumes:
       - .:/usr/clean-node-types/app
     networks:
-      - clean-node-types
+      - observability
     depends_on:
       - mongo
   mongo:
@@ -37,4 +38,5 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
     networks:
-      - clean-node-types
+      - observability
+
