@@ -32,7 +32,7 @@ services:
       - 27017:27017
     container_name: clean-node-types-mongo
     volumes:
-      - ./data:/data/db
+      - ./db-data:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
