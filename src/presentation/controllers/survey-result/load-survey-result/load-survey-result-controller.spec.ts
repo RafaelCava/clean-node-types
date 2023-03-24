@@ -64,12 +64,12 @@ describe('SaveSurveyResult Controller', () => {
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 
-  test('Should call LoadSurveyResult', async () => {
+  test('Should call LoadSurveyResult with correct values', async () => {
     const { sut, loadSurveyResultStub } = makeSut()
     const loadByIdSpy = jest.spyOn(loadSurveyResultStub, 'load')
     const httpRequest = mockFakeRequest()
     await sut.handle(httpRequest)
-    expect(loadByIdSpy).toHaveBeenCalledWith('any_survey_id')
+    expect(loadByIdSpy).toHaveBeenCalledWith('any_survey_id', 'any_account_id')
   })
 
   test('Should returns 500 if LoadSurveyResult throws', async () => {
