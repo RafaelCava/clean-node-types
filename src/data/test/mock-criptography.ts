@@ -27,6 +27,7 @@ export const EncrypterSpy = (): Encrypter => {
       return Promise.resolve('any_token')
     }
   }
+
   return new EncrypterStub()
 }
 
