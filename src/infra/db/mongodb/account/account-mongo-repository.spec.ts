@@ -24,15 +24,11 @@ describe('Account Mongo Repository', () => {
   })
 
   describe('add()', () => {
-    test('Should return an account on add success', async () => {
+    test('Should return true on add success', async () => {
       const sut = makeSut()
       const accountData = mockAddAccountParams()
       const account = await sut.add(accountData)
-      expect(account).toBeTruthy()
-      expect(account.id).toBeTruthy()
-      for (const key of ['name', 'email', 'password']) {
-        expect(account[key]).toBe(accountData[key])
-      }
+      expect(account).toBe(true)
     })
   })
 
