@@ -3,7 +3,7 @@ import { LoadSurveysSpy } from '@/presentation/test'
 import MockDate from 'mockdate'
 import { noContent, ok, serverError } from '../../../helpers/http/http-helper'
 import { LoadSurveysController } from './load-surveys-controller'
-import { LoadSurveys, HttpRequest } from './load-surveys-controller-protocols'
+import { LoadSurveys } from './load-surveys-controller-protocols'
 
 type SutTypes = {
   sut: LoadSurveysController
@@ -19,10 +19,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const mockRequest = (): HttpRequest => ({
-  headers: {
-    'x-access-token': 'any_token'
-  },
+const mockRequest = (): LoadSurveysController.Request => ({
   accountId: 'any_account_id'
 })
 
