@@ -1,7 +1,7 @@
 import { Authentication, Controller, HttpResponse, Validation } from './login-controller-protocols'
 import { badRequest, ok, serverError, unauthorized } from '../../../helpers/http/http-helper'
 
-export class LoginController implements Controller {
+export class LoginController implements Controller<LoginController.Request> {
   constructor (private readonly authentication: Authentication, private readonly validation: Validation) {}
   async handle (request: LoginController.Request): Promise<HttpResponse> {
     try {
