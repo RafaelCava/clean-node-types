@@ -1,5 +1,5 @@
 import MockDate from 'mockdate'
-import { SaveSurveyResult, SaveSurveyResultParams } from './save-survey-result-controller-protocols'
+import { SaveSurveyResult } from './save-survey-result-controller-protocols'
 import { SaveSurveyResultController } from './save-survey-result-controller'
 import { serverError, forbidden, ok } from '@/presentation/helpers/http/http-helper'
 import { LoadAnswersBySurvey } from '@/domain/usecases/survey/load-answers-by-survey'
@@ -24,7 +24,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const mockSaveSurveyResultModel = (): SaveSurveyResultParams => ({
+const mockSaveSurveyResultModel = (): SaveSurveyResult.Params => ({
   surveyId: 'any_survey_id',
   accountId: 'any_account_id',
   answer: 'any_answer',
