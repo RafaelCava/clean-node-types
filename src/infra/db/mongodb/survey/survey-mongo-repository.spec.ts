@@ -82,7 +82,7 @@ describe('Survey Mongo Repository', () => {
   })
 
   describe('loadById()', () => {
-    test('Should load survey by id on success', async () => {
+    test('Should return survey if survey exists', async () => {
       const sut = makeSut()
       const survey = await surveyCollection.insertOne({
         question: 'any_question_1',
@@ -100,10 +100,38 @@ describe('Survey Mongo Repository', () => {
       expect(surveyLoad).toEqual(MongoHelper.map(surveyFound))
     })
 
-    test('Should return null with load survey by id fails', async () => {
+    test('Should return null with survey not exists', async () => {
       const sut = makeSut()
       const surveyLoad = await sut.loadById(new ObjectId().toString())
       expect(surveyLoad).toBeNull()
+    })
+  })
+
+  describe('loadAnswers()', () => {
+    test('Should load answers if survey exists', async () => {
+      const sut = makeSut()
+      const survey = await surveyCollection.insertOne({
+        question: 'any_question_1',
+        answers: [{
+          image: 'any_image_1',
+          answer: 'any_answer_1'
+        },
+        {
+          answer: 'other_answer_1'
+        }],
+        date: new Date()
+      })
+      const answers = await sut.loadAnswers(survey.insertedId.toString())
+      expect(answers).toEqual([
+        'any_answer_1',
+        'other_answer_1'
+      ])
+    })
+
+    test("Should return an empty array if survey don't exists", async () => {
+      const sut = makeSut()
+      const surveyLoad = await sut.loadAnswers(new ObjectId().toString())
+      expect(surveyLoad).toEqual([])
     })
   })
 

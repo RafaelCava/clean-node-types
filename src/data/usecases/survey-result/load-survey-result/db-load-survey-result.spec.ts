@@ -2,8 +2,8 @@ import MockDate from 'mockdate'
 import { LoadSurveyResultRepository } from '@/data/protocols/db/survey-result/load-survey-result-repository'
 import { LoadSurveyByIdRepositorySpy, LoadSurveyResultRepositorySpy } from '@/data/test'
 import { mockSurveyResultModel, throwError } from '@/domain/test'
-import { LoadSurveyByIdRepository } from '@/data/usecases/survey/load-answers-by-survey/db-load-answers-by-survey-protocols'
 import { DbLoadSurveyResult } from './db-load-survey-result'
+import { LoadSurveyByIdRepository } from '@/data/protocols/db/survey/load-survey-by-id-repository'
 
 type SutTypes = {
   sut: DbLoadSurveyResult
