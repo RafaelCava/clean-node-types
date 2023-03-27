@@ -106,4 +106,29 @@ describe('Survey Mongo Repository', () => {
       expect(surveyLoad).toBeNull()
     })
   })
+
+  describe('checkById()', () => {
+    test("Should return false if survey don't exists", async () => {
+      const sut = makeSut()
+      const surveyLoad = await sut.checkById(new ObjectId().toString())
+      expect(surveyLoad).toBe(false)
+    })
+
+    test('Should return true if survey exists', async () => {
+      const sut = makeSut()
+      const survey = await surveyCollection.insertOne({
+        question: 'any_question_1',
+        answers: [{
+          image: 'any_image_1',
+          answer: 'any_answer_1'
+        },
+        {
+          answer: 'other_answer_1'
+        }],
+        date: new Date()
+      })
+      const surveyLoad = await sut.checkById(survey.insertedId.toString())
+      expect(surveyLoad).toBe(true)
+    })
+  })
 })
