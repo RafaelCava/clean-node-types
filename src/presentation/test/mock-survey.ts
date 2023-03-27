@@ -1,6 +1,5 @@
 import { AddSurvey } from '@/domain/usecases/survey/add-survey'
 import { LoadSurveys } from '@/domain/usecases/survey/load-surveys'
-import { SurveyModel } from '@/domain/models/survey'
 import { mockSurveysModels } from '@/domain/test'
 import { LoadAnswersBySurvey } from '@/domain/usecases/survey/load-answers-by-survey'
 import { CheckSurveyById } from '@/domain/usecases/survey/check-survey-by-id'
@@ -16,7 +15,7 @@ export const AddSurveySpy = (): AddSurvey => {
 
 export const LoadSurveysSpy = (): LoadSurveys => {
   class LoadSurveysStub implements LoadSurveys {
-    async load (accountId: string): Promise<SurveyModel[]> {
+    async load (accountId: string): Promise<LoadSurveys.Result> {
       return Promise.resolve(mockSurveysModels())
     }
   }
