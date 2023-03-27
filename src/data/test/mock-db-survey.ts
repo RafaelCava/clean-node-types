@@ -1,6 +1,7 @@
 import { AddSurveyRepository } from '@/data/protocols/db/survey/add-survey-repository'
 import { LoadSurveyByIdRepository } from '@/data/protocols/db/survey/load-survey-by-id-repository'
 import { CheckSurveyByIdRepository } from '@/data/protocols/db/survey/check-survey-by-id-repository'
+import { LoadAnswersBySurveyRepository } from '@/data/protocols/db/survey/load-answers-by-survey-repository'
 import { SurveyModel } from '@/domain/models/survey'
 import { mockSurveyModel, mockSurveysModels } from '@/domain/test'
 import { LoadSurveysRepository } from '../protocols/db/survey/load-surveys-repository'
@@ -39,4 +40,17 @@ export const CheckSurveyByIdRepositorySpy = (): CheckSurveyByIdRepository => {
     }
   }
   return new CheckSurveyByIdRepositorySpy()
+}
+
+export const LoadAnswersBySurveyRepositorySpy = (): LoadAnswersBySurveyRepository => {
+  class LoadAnswersBySurveyRepositorySpy implements LoadAnswersBySurveyRepository {
+    async loadAnswers (surveyId: string): Promise<LoadAnswersBySurveyRepository.Result> {
+      return Promise.resolve([
+        'any_answer',
+        'other_answer',
+        'any_answer_3'
+      ])
+    }
+  }
+  return new LoadAnswersBySurveyRepositorySpy()
 }
