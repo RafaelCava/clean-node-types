@@ -2,7 +2,7 @@
   "name": "clean-node-types",
   "version": "3.0.0",
   "main": "index.js",
-  "author": "Rafael Cavalcante <rafael.cavalcante@tallos.com.br>",
+  "author": "Rafael Cavalcante <ra.facavalcante@hotmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
