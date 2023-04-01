@@ -1,5 +1,5 @@
 import MockDate from 'mockdate'
-import { Collection } from 'mongodb'
+import { Collection, ObjectId } from 'mongodb'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import { createTestClient } from 'apollo-server-integration-testing'
 import { makeApolloServer } from './helpers'
@@ -42,7 +42,7 @@ describe('SurveyResult GraphQL', () => {
     await accountCollection.deleteMany({})
   })
 
-  describe('SaveSurveyResult Query', () => {
+  describe('LoadSurveyResult Query', () => {
     const surveysResultQuery = gql`
       query surveyResult ($surveyId: String!) {
         surveyResult (surveyId: $surveyId) { 
@@ -122,6 +122,25 @@ describe('SurveyResult GraphQL', () => {
       })
       expect(res.data).toBeFalsy()
       expect(res.errors[0].message).toBe('Access denied')
+    })
+
+    test('Should return InvalidParamError if survey not exists', async () => {
+      const accessToken = await mockAccessToken()
+      const { query } = createTestClient({
+        apolloServer,
+        extendMockRequest: {
+          headers: {
+            'x-access-token': accessToken
+          }
+        }
+      })
+      const res: any = await query(surveysResultQuery, {
+        variables: {
+          surveyId: new ObjectId().toString()
+        }
+      })
+      expect(res.data).toBeFalsy()
+      expect(res.errors[0].message).toBe('Invalid param: surveyId')
     })
   })
 })
