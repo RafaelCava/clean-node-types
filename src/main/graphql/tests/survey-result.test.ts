@@ -238,5 +238,25 @@ describe('SurveyResult GraphQL', () => {
       expect(res.data).toBeFalsy()
       expect(res.errors[0].message).toBe('Access denied')
     })
+
+    test('Should return InvalidParamError if survey not exists', async () => {
+      const accessToken = await mockAccessToken()
+      const { mutate } = createTestClient({
+        apolloServer,
+        extendMockRequest: {
+          headers: {
+            'x-access-token': accessToken
+          }
+        }
+      })
+      const res: any = await mutate(saveSurveyResultMutation, {
+        variables: {
+          surveyId: new ObjectId().toString(),
+          answer: 'any_answer'
+        }
+      })
+      expect(res.data).toBeFalsy()
+      expect(res.errors[0].message).toBe('Invalid param: answer')
+    })
   })
 })
