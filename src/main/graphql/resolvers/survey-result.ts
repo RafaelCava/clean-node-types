@@ -4,10 +4,10 @@ import { makeSaveSurveyResultController } from '@/main/factories/controllers/sur
 
 export default {
   Query: {
-    surveyResult: async (parent: any, args: any) => adaptResolver(makeLoadSurveyResultController(), args)
+    surveyResult: async (parent: any, args: any, ctx: any) => adaptResolver(makeLoadSurveyResultController(), args, ctx)
   },
 
   Mutation: {
-    saveSurveyResult: async (parent: any, args: any) => adaptResolver(makeSaveSurveyResultController(), args)
+    saveSurveyResult: async (parent: any, args: any, ctx: any) => adaptResolver(makeSaveSurveyResultController(), args, ctx)
   }
 }
