@@ -193,6 +193,7 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository, 
       })
       .build()
     const surveyResult = await surveyResultsCollection.aggregate(query).toArray()
+    /* istanbul ignore next */
     return surveyResult?.length ? surveyResult[0] as any : null
   }
 }

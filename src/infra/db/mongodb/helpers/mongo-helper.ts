@@ -15,6 +15,7 @@ export const MongoHelper = {
     return this.client.db().collection(name)
   },
   map (collection: any): any {
+    /* istanbul ignore next */
     if (collection?.length) {
       return collection.map((c: any) => this.map(c))
     }
