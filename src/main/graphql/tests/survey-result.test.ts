@@ -210,5 +210,33 @@ describe('SurveyResult GraphQL', () => {
         }
       ])
     })
+
+    test('Should return AccessDeniedError on invalid credentials', async () => {
+      const survey = await surveyCollection.insertOne({
+        question: 'any_question',
+        answers: [
+          {
+            image: 'any_image',
+            answer: 'any_answer'
+          },
+          {
+            image: 'any_image',
+            answer: 'other_answer'
+          }
+        ],
+        date: new Date()
+      })
+      const { mutate } = createTestClient({
+        apolloServer
+      })
+      const res: any = await mutate(saveSurveyResultMutation, {
+        variables: {
+          surveyId: survey.insertedId.toString(),
+          answer: 'any_answer'
+        }
+      })
+      expect(res.data).toBeFalsy()
+      expect(res.errors[0].message).toBe('Access denied')
+    })
   })
 })
