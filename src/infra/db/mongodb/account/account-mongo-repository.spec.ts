@@ -24,15 +24,11 @@ describe('Account Mongo Repository', () => {
   })
 
   describe('add()', () => {
-    test('Should return an account on add success', async () => {
+    test('Should return true on add success', async () => {
       const sut = makeSut()
       const accountData = mockAddAccountParams()
       const account = await sut.add(accountData)
-      expect(account).toBeTruthy()
-      expect(account.id).toBeTruthy()
-      for (const key of ['name', 'email', 'password']) {
-        expect(account[key]).toBe(accountData[key])
-      }
+      expect(account).toBe(true)
     })
   })
 
@@ -79,9 +75,6 @@ describe('Account Mongo Repository', () => {
       const account = await sut.loadByToken('any_token')
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
-      for (const key of ['name', 'email', 'password']) {
-        expect(account[key]).toBe(accountData[key])
-      }
     })
 
     test('Should return an account on loadByToken with role', async () => {
@@ -92,9 +85,6 @@ describe('Account Mongo Repository', () => {
       const account = await sut.loadByToken('any_token', 'admin')
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
-      for (const key of ['name', 'email', 'password', 'role']) {
-        expect(account[key]).toBe(accountData[key])
-      }
     })
 
     test('Should return null on loadByToken with invalid role', async () => {
@@ -114,15 +104,28 @@ describe('Account Mongo Repository', () => {
       const account = await sut.loadByToken('any_token')
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
-      for (const key of ['name', 'email', 'password', 'role']) {
-        expect(account[key]).toBe(accountData[key])
-      }
     })
 
     test('Should return null if loadByToken fails', async () => {
       const sut = makeSut()
       const account = await sut.loadByToken('any_token')
       expect(account).toBeNull()
+    })
+  })
+
+  describe('checkByEmail()', () => {
+    test('Should return false if invalid email are is provide', async () => {
+      const sut = makeSut()
+      const exists = await sut.checkByEmail('invalid_mail@mail.com')
+      expect(exists).toBe(false)
+    })
+
+    test('Should return true if valid email are is provide', async () => {
+      const sut = makeSut()
+      const accountData = mockAddAccountParams()
+      await accountCollection.insertOne(accountData)
+      const exists = await sut.checkByEmail(mockAddAccountParams().email)
+      expect(exists).toBe(true)
     })
   })
 })

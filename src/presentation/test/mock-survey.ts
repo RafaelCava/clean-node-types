@@ -1,12 +1,12 @@
-import { AddSurvey, AddSurveyParams } from '@/domain/usecases/survey/add-survey'
+import { AddSurvey } from '@/domain/usecases/survey/add-survey'
 import { LoadSurveys } from '@/domain/usecases/survey/load-surveys'
-import { SurveyModel } from '@/domain/models/survey'
-import { mockSurveysModels, mockSurveyModel } from '@/domain/test'
-import { LoadSurveyById } from '@/domain/usecases/survey/load-survey-by-id'
+import { mockSurveysModels } from '@/domain/test'
+import { LoadAnswersBySurvey } from '@/domain/usecases/survey/load-answers-by-survey'
+import { CheckSurveyById } from '@/domain/usecases/survey/check-survey-by-id'
 
 export const AddSurveySpy = (): AddSurvey => {
   class AddSurveyStub implements AddSurvey {
-    async add (data: AddSurveyParams): Promise<void> {
+    async add (data: AddSurvey.Params): Promise<void> {
       return Promise.resolve()
     }
   }
@@ -15,18 +15,27 @@ export const AddSurveySpy = (): AddSurvey => {
 
 export const LoadSurveysSpy = (): LoadSurveys => {
   class LoadSurveysStub implements LoadSurveys {
-    async load (accountId: string): Promise<SurveyModel[]> {
+    async load (accountId: string): Promise<LoadSurveys.Result> {
       return Promise.resolve(mockSurveysModels())
     }
   }
   return new LoadSurveysStub()
 }
 
-export const LoadSurveyByIdSpy = (): LoadSurveyById => {
-  class LoadSurveyByIdStub implements LoadSurveyById {
-    async loadById (id: string): Promise<SurveyModel> {
-      return Promise.resolve(mockSurveyModel())
+export const LoadAnswersBySurveySpy = (): LoadAnswersBySurvey => {
+  class LoadAnswersBySurveySpy implements LoadAnswersBySurvey {
+    async loadAnswers (id: string): Promise<LoadAnswersBySurvey.Result> {
+      return Promise.resolve(['any_answer'])
     }
   }
-  return new LoadSurveyByIdStub()
+  return new LoadAnswersBySurveySpy()
+}
+
+export const CheckSurveyByIdSpy = (): CheckSurveyById => {
+  class CheckSurveyByIdSpy implements CheckSurveyById {
+    async checkById (id: string): Promise<CheckSurveyById.Result> {
+      return Promise.resolve(true)
+    }
+  }
+  return new CheckSurveyByIdSpy()
 }

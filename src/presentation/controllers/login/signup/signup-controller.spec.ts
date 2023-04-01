@@ -2,7 +2,6 @@ import { SignUpController } from './signup-controller'
 import { MissingParamError, ServerError, EmailInUseError } from '../../../erros'
 import {
   AddAccount,
-  HttpRequest,
   Validation,
   Authentication
 } from './signup-controller-protocols'
@@ -24,13 +23,11 @@ const makeSut = (): SutTypes => {
   return { sut, validationStub, addAccountStub, authenticationStub }
 }
 
-const mockRequest = (): HttpRequest => ({
-  body: {
-    name: 'any_name',
-    email: 'any_email@mail.com',
-    password: 'any_value',
-    passwordConfirmation: 'any_value'
-  }
+const mockRequest = (): SignUpController.Request => ({
+  name: 'any_name',
+  email: 'any_email@mail.com',
+  password: 'any_value',
+  passwordConfirmation: 'any_value'
 })
 
 describe('SignUp Controller', () => {
@@ -53,9 +50,9 @@ describe('SignUp Controller', () => {
   test('Should call Validation with correct value', async () => {
     const { sut, validationStub } = makeSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
-    const httpRequest = mockRequest()
-    await sut.handle(httpRequest)
-    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(validateSpy).toHaveBeenCalledWith(request)
   })
 
   test('Should call AddAccount with correct values', async () => {
@@ -85,8 +82,8 @@ describe('SignUp Controller', () => {
   test('Should call Authentication with correct values', async () => {
     const { sut, authenticationStub } = makeSut()
     const authSpy = jest.spyOn(authenticationStub, 'auth')
-    const httpRequest: HttpRequest = mockRequest()
-    await sut.handle(httpRequest)
+    const request = mockRequest()
+    await sut.handle(request)
     expect(authSpy).toHaveBeenCalledWith({
       email: 'any_email@mail.com',
       password: 'any_value'

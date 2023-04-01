@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse, Controller } from '@/presentation/protocols'
+import { HttpResponse, Controller } from '@/presentation/protocols'
 import { ok, serverError } from '@/presentation/helpers/http/http-helper'
 import { LogControllerDecorator } from './log-controller-decorator'
 import { LogErrorRepository } from '@/data/protocols/db/log/log-error-repository'
@@ -7,21 +7,12 @@ import { mockAccountModel } from '@/domain/test'
 
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
-    async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+    async handle (request: any): Promise<HttpResponse> {
       return Promise.resolve(ok(mockAccountModel()))
     }
   }
   return new ControllerStub()
 }
-
-const mockRequest = (): HttpRequest => ({
-  body: {
-    name: 'any_name',
-    email: 'any_email@mail.com',
-    password: 'any_value',
-    passwordConfirmation: 'any_value'
-  }
-})
 
 type SutTypes = {
   sut: LogControllerDecorator
@@ -44,9 +35,9 @@ describe('LogController Decorator', () => {
   test('Should call controller handle', async () => {
     const { sut, controllerStub } = makeSut()
     const handleSpy = jest.spyOn(controllerStub, 'handle')
-    const httpRequest = mockRequest()
-    await sut.handle(httpRequest)
-    expect(handleSpy).toHaveBeenCalledWith(httpRequest)
+    const request = ''
+    await sut.handle(request)
+    expect(handleSpy).toHaveBeenCalledWith(request)
   })
 
   test('Should call logErrorRepository with correct error if controller returns a server error', async () => {
@@ -56,8 +47,8 @@ describe('LogController Decorator', () => {
     const error = serverError(fakeError)
     const logSpy = jest.spyOn(logErrorRepositoryStub, 'logError')
     jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(Promise.resolve(error))
-    const httpRequest = mockRequest()
-    await sut.handle(httpRequest)
+    const request = ''
+    await sut.handle(request)
     expect(logSpy).toHaveBeenCalledWith('any_stack')
   })
 })
