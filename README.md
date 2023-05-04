@@ -31,9 +31,9 @@ para acessar a documentação
   <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/RafaelCava/tdd-ddd-typerscript-node?color=56BEB8" /> -->
 </p>
 
-<h4 align="center"> 
+<!-- <h4 align="center"> 
 	🚧  Clean Node Types 🚀 Em construção...  🚧
-</h4> 
+</h4>  -->
 
 <hr>
 
