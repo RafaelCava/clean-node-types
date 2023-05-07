@@ -14,7 +14,7 @@ services:
     container_name: clean-node-types
     restart: always
     environment:
-      MONGO_URL: mongodb://root:root@mongo:27017/clean-node-api?authSource=admin
+      MONGO_URL: mongodb://root:root@host.docker.internal/clean-node-api?authSource=admin
       PORT: 5050
     ports:
       - 5050:5050
@@ -25,6 +25,8 @@ services:
       - clean-node-types
     depends_on:
       - mongo
+    extra_hosts:
+      - host.docker.internal:host-gateway
   mongo:
     image: mongo:4.0.3
     restart: always
