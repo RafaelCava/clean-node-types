@@ -3,11 +3,11 @@ import schemas from './schemas'
 import paths from './paths'
 
 export default {
-  openapi: '3.0.2',
+  openapi: '3.0.0',
   info: {
     title: 'Clean Node API',
     description: 'API do curso do Mango para realizar enquetes entre programadores',
-    version: '3.0.1',
+    version: '3.0.2',
     license: {
       name: 'MIT',
       url: 'https://github.com/RafaelCava/clean-node-types/blob/master/LICENSE'
